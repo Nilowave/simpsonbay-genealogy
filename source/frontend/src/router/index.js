@@ -6,17 +6,11 @@ import PathNotFound from "../components/PathNotFound";
 import store from "../store/index";
 import axios from "axios";
 
-const isAuthenticated = false;
-
 const routes = [
   {
     path: "/",
     name: "Home",
     component: Home,
-    beforeEnter: (to, from, next) => {
-      if (to.name !== "Login" && !isAuthenticated) next({ name: "Login" });
-      else next();
-    },
   },
   {
     path: "/login",
@@ -29,13 +23,13 @@ const routes = [
     component: Register,
     beforeEnter: (to, from, next) => {
       axios
-        .get(`http://localhost:1337/getinvite/${to.params.id}`)
+        .get(`${process.env.API_DOMAIN}/getinvite/${to.params.id}`)
         .then((res) => {
           store.commit("setInvite", res.data);
           next();
         })
         .catch((err) => {
-          console.log(err);
+          console.log("no invite found");
           next("/login");
         });
     },
@@ -46,6 +40,30 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  console.log("check if logged in", to);
+  axios
+    .get(`${process.env.API_DOMAIN}/users/me`, {
+      withCredentials: true,
+    })
+    .then((res) => {
+      console.log("user logged in as", res.data);
+      if (to.name === "Login") {
+        next({ name: "Home" });
+      } else {
+        next();
+      }
+    })
+    .catch((err) => {
+      if (to.name === "Login" || to.name === "Register") {
+        next();
+      } else {
+        console.log("nope logi first");
+        next({ name: "Login" });
+      }
+    });
 });
 
 export default router;

@@ -64,6 +64,10 @@
     },
     "lastRead": {
       "type": "datetime"
+    },
+    "fullname": {
+      "type": "string",
+      "required": true
     }
   }
 }

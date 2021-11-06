@@ -43,6 +43,9 @@
 <script>
 import * as S from "./Login.styles";
 import { useForm } from "vue-hooks-form";
+import axios from "axios";
+import router from "../../router";
+
 export default {
   components: { ...S },
   setup() {
@@ -55,10 +58,31 @@ export default {
     const password = useField("password", {
       rule: {
         required: true,
-        min: 6,
+        min: process.env.NODE_ENV === "production" ? 6 : 0,
       },
     });
-    const onSubmit = (data) => console.log(data);
+
+    const onSubmit = (data) => {
+      axios
+        .post(
+          `${process.env.API_DOMAIN}/auth/local`,
+          {
+            identifier: data.email,
+            password: data.password,
+          },
+          {
+            withCredentials: true,
+          }
+        )
+        .then((res) => {
+          console.log("login succes, push /", res.data);
+          router.push("/");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+
     return {
       email,
       password,

@@ -74,15 +74,14 @@ import { Error, InputWrapper } from "../Login/Login.styles";
 import { useForm } from "vue-hooks-form";
 import store from "../../store";
 import axios from "axios";
-
-console.log("get invite");
+import router from "../../router";
 
 export default {
   components: { ...S, Error, InputWrapper },
   setup() {
     const invite = store.state.invite;
     const { useField, handleSubmit } = useForm({
-      defaultValues: { email: invite.Email },
+      defaultValues: { email: invite.email },
     });
     const name = useField("name", {
       rule: { required: true },
@@ -93,7 +92,7 @@ export default {
     const password = useField("password", {
       rule: {
         required: true,
-        min: 6,
+        min: process.env.NODE_ENV === "production" ? 6 : 0,
       },
     });
     const confirmpassword = useField("confirmpassword", {
@@ -111,16 +110,34 @@ export default {
     const onSubmit = (data) => {
       console.log(data);
       axios
-        .post("http://localhost:1337/auth/local/register", {
-          username: data.name,
+        .post(`${process.env.API_DOMAIN}/auth/local/register`, {
+          fullname: data.name,
           email: data.email,
+          username: data.email,
           password: data.password,
         })
         .then((response) => {
-          // Handle success.
-          console.log("Well done!");
-          console.log("User profile", response.data.user);
-          console.log("User token", response.data.jwt);
+          const token = response.data.jwt;
+          axios
+            .put(
+              `${process.env.API_DOMAIN}/invites/${invite.id}`,
+              {
+                confirmed: true,
+              },
+              {
+                headers: {
+                  authorization: `Bearer ${token}`,
+                },
+              }
+            )
+            .then((res) => {
+              console.log("updated invtie", res.data);
+              router.push("/");
+            })
+            .catch((err) => {
+              console.log("failed updating invite", err);
+              router.push("/");
+            });
         })
         .catch((error) => {
           // Handle error.

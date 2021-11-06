@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "",
   "author": "",
+  "proxy": "http://localhost:1337",
   "scripts": {
     "build": "vue-cli-service build --dest demo",
     "dist": "rollup -c rollup.config.js",
@@ -23,6 +24,7 @@
     "coffee-loader": "^0.9.0",
     "coffeescript": "^2.4.1",
     "core-js": "^2.6.5",
+    "cors": "^2.8.5",
     "rematrix": "^0.4.1",
     "rollup": "^1.12.5",
     "rollup-plugin-coffee-script": "^2.0.0",

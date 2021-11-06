@@ -9,9 +9,10 @@ module.exports = async (ctx, next) => {
     // request is already authenticated in a different way
     return next();
   }
-
   if (ctx.request && ctx.request.header && !ctx.request.header.authorization) {
     const token = ctx.cookies.get("token");
+    console.log("get token", token);
+
     if (token) {
       ctx.request.header.authorization = "Bearer " + token;
     }
@@ -30,7 +31,7 @@ module.exports = async (ctx, next) => {
       // fetch authenticated user
       ctx.state.user = await strapi.plugins[
         "users-permissions"
-      ].services.user.fetchAuthenticatedUser(id);
+      ].services.user.fetch(id);
     } catch (err) {
       return handleErrors(ctx, err, "unauthorized");
     }

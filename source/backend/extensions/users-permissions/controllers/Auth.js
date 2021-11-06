@@ -177,10 +177,24 @@ module.exports = {
         return ctx.badRequest(null, error === "array" ? error[0] : error);
       }
 
+      const token = strapi.plugins["users-permissions"].services.jwt.issue({
+        id: user.id,
+      });
+
+      ctx.cookies.set("token", token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production" ? true : false,
+        maxAge: 1000 * 60 * 60 * 24 * 14, // 14 Day Age
+        domain:
+          process.env.NODE_ENV === "development"
+            ? "localhost"
+            : process.env.PRODUCTION_URL,
+      });
+
+      console.log("set a cookie", token);
+
       ctx.send({
-        jwt: strapi.plugins["users-permissions"].services.jwt.issue({
-          id: user.id,
-        }),
+        status: "Authenticated",
         user: sanitizeEntity(user.toJSON ? user.toJSON() : user, {
           model: strapi.query("user", "users-permissions").model,
         }),

@@ -12,16 +12,16 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "Email": {
+    "email": {
       "type": "email",
       "required": true,
       "unique": false
     },
-    "Invite": {
+    "invite": {
       "type": "uid",
       "required": true
     },
-    "Confirmed": {
+    "confirmed": {
       "type": "boolean",
       "default": false
     }

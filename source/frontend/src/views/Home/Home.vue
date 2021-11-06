@@ -4,6 +4,7 @@
     :class="{ 'has-mouse': hasMouse }"
     @touchstart="hasMouse = false"
   >
+    <button v-on:click="logout">logout</button>
     <Flipbook
       class="flipbook"
       :pages="pages"
@@ -47,62 +48,100 @@
   </div>
 </template>
 
-<script lang="coffee">
-import 'vue-material-design-icons/styles.css'
-import Ribbon from 'vue-ribbon'
-import LeftIcon from 'vue-material-design-icons/ChevronLeftCircle'
-import RightIcon from 'vue-material-design-icons/ChevronRightCircle'
-import PlusIcon from 'vue-material-design-icons/PlusCircle'
-import MinusIcon from 'vue-material-design-icons/MinusCircle'
-import Flipbook from '../../components/Flipbook'
+<script>
+import "vue-material-design-icons/styles.css";
+import Ribbon from "vue-ribbon";
+import LeftIcon from "vue-material-design-icons/ChevronLeftCircle";
+import RightIcon from "vue-material-design-icons/ChevronRightCircle";
+import PlusIcon from "vue-material-design-icons/PlusCircle";
+import MinusIcon from "vue-material-design-icons/MinusCircle";
+import Flipbook from "../../components/Flipbook";
+import axios from "axios";
+import router from "../../router";
 
-export default
-  name: 'home'
-  components: { Flipbook, LeftIcon, RightIcon, PlusIcon, MinusIcon, Ribbon }
-  data: ->
-    pages: [],
-    pagesHiRes: [],
-    hasMouse: true
-    pageNum: null
-  methods:
-    onFlipLeftStart: (page) -> console.log 'flip-left-start', page
-    onFlipLeftEnd: (page) ->
-      console.log 'flip-left-end', page
-      window.location.hash = '#' + page
-    onFlipRightStart: (page) -> console.log 'flip-right-start', page
-    onFlipRightEnd: (page) ->
-      console.log 'flip-right-end', page
-      window.location.hash = '#' + page
-    onZoomStart: (zoom) -> console.log 'zoom-start', zoom
-    onZoomEnd: (zoom) -> console.log 'zoom-end', zoom
-    setPageFromHash: ->
-      n = parseInt window.location.hash.slice(1), 10
-      @pageNum = n if isFinite n
-  mounted: ->
-    TOTAL_PAGES = 77
-    lowResPages = [...new Array(TOTAL_PAGES).keys()].map((index) => 'pdf/low_res/page_' + (index+1) + '.jpg')
-    highResPages = [...new Array(TOTAL_PAGES).keys()].map((index) => 'pdf/high_res/page_' + (index+1) + '.jpg')
+export default {
+  name: "home",
+  components: { Flipbook, LeftIcon, RightIcon, PlusIcon, MinusIcon, Ribbon },
+  data() {
+    return {
+      pages: [],
+      pagesHiRes: [],
+      hasMouse: true,
+      pageNum: null,
+    };
+  },
+  methods: {
+    logout() {
+      axios
+        .post("http://localhost:1337/logout", {}, { withCredentials: true })
+        .then((res) => {
+          console.log("logout success", res.data);
+          router.push("/login");
+        })
+        .catch((err) => {
+          console.log(err);
+          router.push("/login");
+        });
+    },
+    onFlipLeftStart(page) {
+      console.log("flip-left-start", page);
+    },
+    onFlipLeftEnd(page) {
+      console.log("flip-left-end", page);
+      window.location.hash = "#" + page;
+    },
+    onFlipRightStart(page) {
+      console.log("flip-right-start", page);
+    },
+    onFlipRightEnd(page) {
+      console.log("flip-right-end", page);
+      window.location.hash = "#" + page;
+    },
+    onZoomStart(zoom) {
+      console.log("zoom-start", zoom);
+    },
+    onZoomEnd(zoom) {
+      console.log("zoom-end", zoom);
+    },
+    setPageFromHash() {
+      const n = parseInt(window.location.hash.slice(1), 10);
+      if (isFinite(n)) {
+        this.pageNum = n;
+      }
+    },
+  },
+  mounted() {
+    const TOTAL_PAGES = 77;
+    const lowResPages = [...new Array(TOTAL_PAGES).keys()].map(
+      (index) => "pdf/low_res/page_" + (index + 1) + ".jpg"
+    );
+    const highResPages = [...new Array(TOTAL_PAGES).keys()].map(
+      (index) => "pdf/high_res/page_" + (index + 1) + ".jpg"
+    );
 
-    window.addEventListener 'keydown', (ev) =>
-      flipbook = @$refs.flipbook
-      return unless flipbook
-      flipbook.flipLeft() if ev.keyCode == 37 and flipbook.canFlipLeft
-      flipbook.flipRight() if ev.keyCode == 39 and flipbook.canFlipRight
+    window.addEventListener("keydown", (ev) => {
+      const flipbook = this.$refs.flipbook;
+      if (!flipbook) {
+        return;
+      }
+      if (ev.keyCode === 37 && flipbook.canFlipLeft) {
+        flipbook.flipLeft();
+      }
+      if (ev.keyCode === 39 && flipbook.canFlipRight) {
+        return flipbook.flipRight();
+      }
+    });
 
-    # Simulate asynchronous pages initialization
-    setTimeout (=>
-      @pages = [
-        null
-        ...lowResPages
-      ]
-      @pagesHiRes = [
-        null
-        ...highResPages
-      ]
-    ), 1
+    // Simulate asynchronous pages initialization
+    setTimeout(() => {
+      this.pages = [null, ...lowResPages];
+      this.pagesHiRes = [null, ...highResPages];
+    }, 1);
 
-    window.addEventListener 'hashchange', @setPageFromHash
-    @setPageFromHash()
+    window.addEventListener("hashchange", this.setPageFromHash);
+    this.setPageFromHash();
+  },
+};
 </script>
 
 <style>
