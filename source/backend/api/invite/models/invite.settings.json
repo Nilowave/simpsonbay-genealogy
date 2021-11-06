@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "invites",
+  "info": {
+    "name": "Invite",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Email": {
+      "type": "email",
+      "required": true,
+      "unique": false
+    },
+    "Invite": {
+      "type": "uid",
+      "required": true
+    },
+    "Confirmed": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}
