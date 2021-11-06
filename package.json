@@ -1,0 +1,10 @@
+{
+  "name": "simpsonbay-genealogy",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Danilo <danilo@mediamonks.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "cd backend && yarn start"
+  }
+}
