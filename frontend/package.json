@@ -5,7 +5,7 @@
   "author": "",
   "proxy": "http://localhost:1337",
   "scripts": {
-    "build": "vue-cli-service build --dest demo",
+    "build": "vue-cli-service build --dest ../backend/demo",
     "dist": "rollup -c rollup.config.js",
     "start": "vue-cli-service serve"
   },
