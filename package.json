@@ -5,7 +5,7 @@
   "author": "Danilo <danilo@mediamonks.com>",
   "license": "MIT",
   "scripts": {
-    "heroku-postbuild": "npm --prefix ./frontend build && npm --prefix ./backend install && npm --prefix ./backend start"
+    "heroku-postbuild": "npm --prefix ./frontend build && npm --prefix ./backend install && npm --prefix ./backend build"
   },
   "dependencies": {
     "knex": "0.21.18",
