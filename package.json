@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "start": "npm --prefix ./backend start",
-    "heroku-postbuild": "npm --prefix ./frontend install && npm --prefix ./frontend build && npm --prefix ./backend install && npm --prefix ./backend build"
+    "heroku-postbuild": "npm --prefix ./frontend install && npm --prefix ./frontend build"
   },
   "dependencies": {
     "knex": "0.21.18",
