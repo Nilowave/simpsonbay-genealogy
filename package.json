@@ -5,6 +5,6 @@
   "author": "Danilo <danilo@mediamonks.com>",
   "license": "MIT",
   "scripts": {
-    "start": "cd backend && yarn start"
+    "heroku-postbuild": "cd frontend && yarn build && cd ../backend && yarn && yarn build"
   }
 }
