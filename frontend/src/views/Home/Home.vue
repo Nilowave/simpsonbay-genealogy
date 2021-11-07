@@ -58,6 +58,7 @@ import MinusIcon from "vue-material-design-icons/MinusCircle";
 import Flipbook from "../../components/Flipbook";
 import axios from "axios";
 import router from "../../router";
+import store from "../../store/index";
 
 export default {
   name: "home",
@@ -73,9 +74,14 @@ export default {
   methods: {
     logout() {
       axios
-        .post("http://localhost:1337/logout", {}, { withCredentials: true })
+        .post(
+          `${process.env.VUE_APP_API_DOMAIN}/logout`,
+          {},
+          { withCredentials: true }
+        )
         .then((res) => {
           console.log("logout success", res.data);
+          store.commit("setIsLoggedIn", false);
           router.push("/login");
         })
         .catch((err) => {

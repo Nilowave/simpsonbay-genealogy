@@ -64,7 +64,7 @@ export const FlexWrapper = styled.div`
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  padding: 5rem 10rem 10rem;
+  padding: 5rem 6rem 10rem;
 `;
 
 export const Logo = styled.img`
