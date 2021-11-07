@@ -135,7 +135,7 @@ export default {
               router.push("/");
             })
             .catch((err) => {
-              console.log("failed updating invite", err);
+              console.log("failed updating invite", err.response);
               router.push("/");
             });
         })

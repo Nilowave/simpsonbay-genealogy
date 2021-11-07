@@ -39,7 +39,8 @@ const routes = [
             next();
           })
           .catch((err) => {
-            console.log("no invite found", err);
+            console.log("no invite found");
+            console.log(err.response);
             next("/login");
           });
     },
@@ -71,7 +72,7 @@ router.beforeEach((to, from, next) => {
         }
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.response);
         if (to.name === "Login" || to.name === "Register") {
           console.log(to);
           next();
