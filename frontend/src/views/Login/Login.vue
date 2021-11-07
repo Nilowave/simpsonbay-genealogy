@@ -6,7 +6,7 @@
     <Container>
       <StyledPicture />
       <FlexWrapper>
-        <Logo src="/images/logos_transparent.png" alt="logo" />
+        <Logo src="/images/logos_transparent.png" alt="Simpson Bay Genealogy" />
         <Wrapper>
           <Heading>Sign-in</Heading>
           <Paragraph>To read the family book</Paragraph>
@@ -79,7 +79,9 @@ export default {
           router.push("/");
         })
         .catch((err) => {
-          console.log(err);
+          if (err.response.status === 400) {
+          } else {
+          }
         });
     };
 

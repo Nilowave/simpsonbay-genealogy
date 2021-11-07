@@ -4,7 +4,11 @@
     :class="{ 'has-mouse': hasMouse }"
     @touchstart="hasMouse = false"
   >
-    <button v-on:click="logout">logout</button>
+    <Background>
+      <Logo src="/images/logos_transparent.png" alt="Simpson Bay Genealogy" />
+    </Background>
+
+    <LogoutButton v-on:click="logout">Logout</LogoutButton>
     <Flipbook
       class="flipbook"
       :pages="pages"
@@ -50,6 +54,7 @@
 
 <script>
 import "vue-material-design-icons/styles.css";
+import * as S from "./Home.styles";
 import Ribbon from "vue-ribbon";
 import LeftIcon from "vue-material-design-icons/ChevronLeftCircle";
 import RightIcon from "vue-material-design-icons/ChevronRightCircle";
@@ -62,7 +67,15 @@ import store from "../../store/index";
 
 export default {
   name: "home",
-  components: { Flipbook, LeftIcon, RightIcon, PlusIcon, MinusIcon, Ribbon },
+  components: {
+    Flipbook,
+    LeftIcon,
+    RightIcon,
+    PlusIcon,
+    MinusIcon,
+    Ribbon,
+    ...S,
+  },
   data() {
     return {
       pages: [],
@@ -158,7 +171,6 @@ body {
 }
 
 #home {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   height: 100vh;
@@ -166,9 +178,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: url("/images/bg.jpg") no-repeat;
   background-size: cover;
-  color: #ccc;
   overflow: hidden;
 }
 
@@ -179,10 +189,12 @@ a {
 .action-bar {
   width: 100%;
   height: 30px;
-  padding: 10px 0;
+  padding: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
+  background: white;
+  border-radius: 1rem;
 }
 
 .action-bar .btn {
@@ -216,6 +228,11 @@ a {
 .action-bar .page-num {
   font-size: 12px;
   margin-left: 10px;
+}
+
+.flipbook {
+  display: flex;
+  flex-direction: column-reverse;
 }
 
 .flipbook .viewport {

@@ -1,12 +1,12 @@
 import { normalize } from "polished";
 import { injectGlobal } from "vue-styled-components";
-import { colors } from "./theme";
+import { theme } from "./theme";
+import { typestyles } from "./typestyles";
 
 injectGlobal`
 	${normalize()}
 
 	html {
-    /* font-family: ${({ theme }) => theme.fonts.azoSansWeb}; */
     -webkit-text-size-adjust: 100%;
     box-sizing: border-box;
     font-size: 62.5%;
@@ -14,11 +14,13 @@ injectGlobal`
     -webkit-font-smoothing: antialiased;
     -webkit-tap-highlight-color: transparent;
   }
-
+  
   body {
+    ${typestyles.body};
+    font-family: ${theme.fonts.gillSans};
     font-size: 1.6rem;
-    background-color: ${colors.cream};
-    color: ${colors.black};
+    background-color: ${theme.colors.cream};
+    color: ${theme.colors.black};
   }
 
   html, body {
