@@ -23,7 +23,7 @@ const routes = [
     component: Register,
     beforeEnter: (to, from, next) => {
       axios
-        .get(`${process.env.API_DOMAIN}/getinvite/${to.params.id}`)
+        .get(`${process.env.VUE_APP_API_DOMAIN}/getinvite/${to.params.id}`)
         .then((res) => {
           store.commit("setInvite", res.data);
           next();
@@ -45,7 +45,7 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   console.log("check if logged in", to);
   axios
-    .get(`${process.env.API_DOMAIN}/users/me`, {
+    .get(`${process.env.VUE_APP_API_DOMAIN}/users/me`, {
       withCredentials: true,
     })
     .then((res) => {

@@ -110,7 +110,7 @@ export default {
     const onSubmit = (data) => {
       console.log(data);
       axios
-        .post(`${process.env.API_DOMAIN}/auth/local/register`, {
+        .post(`${process.env.VUE_APP_API_DOMAIN}/auth/local/register`, {
           fullname: data.name,
           email: data.email,
           username: data.email,
@@ -120,7 +120,7 @@ export default {
           const token = response.data.jwt;
           axios
             .put(
-              `${process.env.API_DOMAIN}/invites/${invite.id}`,
+              `${process.env.VUE_APP_API_DOMAIN}/invites/${invite.id}`,
               {
                 confirmed: true,
               },

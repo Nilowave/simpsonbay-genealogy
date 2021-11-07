@@ -65,7 +65,7 @@ export default {
     const onSubmit = (data) => {
       axios
         .post(
-          `${process.env.API_DOMAIN}/auth/local`,
+          `${process.env.VUE_APP_API_DOMAIN}/auth/local`,
           {
             identifier: data.email,
             password: data.password,

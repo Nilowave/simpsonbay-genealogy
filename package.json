@@ -5,8 +5,7 @@
   "author": "Danilo <danilo@mediamonks.com>",
   "license": "MIT",
   "scripts": {
-    "start": "npm run start --prefix ./backend",
-    "heroku-postbuild": "npm --prefix ./frontend install && npm --prefix ./frontend build"
+    "deploy-heroku": "git subtree push --prefix backend heroku master"
   },
   "dependencies": {
     "knex": "0.21.18",
