@@ -5,7 +5,7 @@
   "author": "Danilo <danilo@mediamonks.com>",
   "license": "MIT",
   "scripts": {
-    "start": "npm --prefix ./backend start",
+    "start": "npm run start --prefix ./backend",
     "heroku-postbuild": "npm --prefix ./frontend install && npm --prefix ./frontend build"
   },
   "dependencies": {
