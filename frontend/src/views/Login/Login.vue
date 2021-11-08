@@ -1,5 +1,5 @@
 <template>
-  <Login>
+  <PageWrapper>
     <Background />
     <GreenOverlay />
 
@@ -35,61 +35,10 @@
           </StyledForm>
           <SecondaryButton>Reset password</SecondaryButton>
         </Wrapper>
+        <Notification :message="message" />
       </FlexWrapper>
     </Container>
-  </Login>
+  </PageWrapper>
 </template>
 
-<script>
-import * as S from "./Login.styles";
-import { useForm } from "vue-hooks-form";
-import axios from "axios";
-import router from "../../router";
-
-export default {
-  components: { ...S },
-  setup() {
-    const { useField, handleSubmit } = useForm({
-      defaultValues: {},
-    });
-    const email = useField("email", {
-      rule: { required: true },
-    });
-    const password = useField("password", {
-      rule: {
-        required: true,
-        min: process.env.NODE_ENV === "production" ? 6 : 0,
-      },
-    });
-
-    const onSubmit = (data) => {
-      axios
-        .post(
-          `${process.env.VUE_APP_API_DOMAIN}/auth/local`,
-          {
-            identifier: data.email,
-            password: data.password,
-          },
-          {
-            withCredentials: true,
-          }
-        )
-        .then((res) => {
-          console.log("login succes, push /", res.data);
-          router.push("/");
-        })
-        .catch((err) => {
-          if (err.response.status === 400) {
-          } else {
-          }
-        });
-    };
-
-    return {
-      email,
-      password,
-      onSubmit: handleSubmit(onSubmit),
-    };
-  },
-};
-</script>
+<script src="./Login.modal.js"></script>

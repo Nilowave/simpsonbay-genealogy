@@ -119,8 +119,8 @@
 </template>
 
 <script lang="coffee">
-import Matrix from '../matrix'
-import spinner from '../assets/icons/spinner.svg'
+import Matrix from '../../matrix'
+import spinner from '../../assets/icons/spinner.svg'
 
 easeIn = (x) -> Math.pow(x, 2)
 easeOut = (x) -> 1 - easeIn(1 - x)

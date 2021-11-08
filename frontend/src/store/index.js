@@ -6,6 +6,7 @@ const store = createStore({
     return {
       isLoggedIn: false,
       invite: {},
+      readPages: null,
     };
   },
   mutations: {
@@ -14,6 +15,9 @@ const store = createStore({
     },
     setInvite(state, data) {
       state.invite = data;
+    },
+    setReadPages(state, value) {
+      state.readPages = value;
     },
   },
   actions: {

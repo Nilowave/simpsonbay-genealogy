@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home/Home.vue";
 import Login from "../views/Login/Login.vue";
 import Register from "../views/Register/Register.vue";
-import PathNotFound from "../components/PathNotFound";
+import PathNotFound from "../components/PathNotFound/PathNotFound";
 import store from "../store/index";
 import axios from "axios";
 
@@ -66,6 +66,7 @@ router.beforeEach((to, from, next) => {
         console.log("user logged in as", res.data);
         if (res.data.id) {
           store.commit("setIsLoggedIn", res.data);
+          store.commit("setReadPages", res.data.readPages);
           next();
         } else {
           next({ name: "Login" });

@@ -14,6 +14,13 @@ export const typestyles = {
     font-weight: 400;
     font-style: normal;
   `,
+  bodySmall: css`
+    font-size: 1.4rem;
+    font-family: ${({ theme }) => theme.fonts.gillSans};
+    line-height: 1.2;
+    font-weight: 400;
+    font-style: normal;
+  `,
   button: css`
     font-size: 1.8rem;
     font-family: ${({ theme }) => theme.fonts.gillSans};

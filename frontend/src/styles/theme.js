@@ -8,6 +8,7 @@ export const colors = {
   green: "#175c4c",
   darkgreen: "#0F4A3C",
   cream: "#efdbce",
+  red: "#ff0000",
 };
 
 export const theme = {
