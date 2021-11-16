@@ -82,4 +82,37 @@ injectGlobal`
   p {
     margin: 0;
   }
+
+  .mirror {
+    transform: scaleX(-1);
+  }
+
+  .v-enter-from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+
+  .v-leave-to {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+
+  .v-enter-active {
+    transition: all 0.3s ease-out;
+  }
+
+  .v-leave-active {
+    transition: all 0.3s ease-in;
+  }
+
+  .large {
+    font-family: ${theme.fonts.baskerville};
+    ${typestyles.h2};
+    font-weight: 700;
+    margin-left: 2rem;
+  }
+
+  .icon-16 {
+    width: 1.6rem;
+  }
 `;

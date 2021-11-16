@@ -6,7 +6,7 @@
     <Container>
       <StyledPicture />
       <ContentWrapper>
-        <Logo src="/images/logos_transparent.png" alt="logo" />
+        <Logo src="/images/logo-stacked.svg" alt="Simpsonbay Genealogy" />
         <Wrapper>
           <Heading>Welcome to the family!</Heading>
           <Paragraph

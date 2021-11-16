@@ -1,19 +1,5 @@
 <template>
   <div>
-    <slot
-      v-bind="{
-        canFlipLeft,
-        canFlipRight,
-        canZoomIn,
-        canZoomOut,
-        page,
-        numPages,
-        flipLeft,
-        flipRight,
-        zoomIn,
-        zoomOut,
-      }"
-    />
     <div
       class="viewport"
       ref="viewport"
@@ -115,6 +101,20 @@
         </div>
       </div>
     </div>
+    <slot
+      v-bind="{
+        canFlipLeft,
+        canFlipRight,
+        canZoomIn,
+        canZoomOut,
+        page,
+        numPages,
+        flipLeft,
+        flipRight,
+        zoomIn,
+        zoomOut,
+      }"
+    />
   </div>
 </template>
 
@@ -877,6 +877,8 @@ export default
   -webkit-overflow-scrolling: touch;
   width: 100%;
   height: 100%;
+  width: 90vw;
+  height: calc(100vh - 90px);
 }
 
 .viewport.zoom {
@@ -914,6 +916,7 @@ export default
 .bounding-box {
   position: absolute;
   user-select: none;
+  box-shadow: 0 0 20px #0f4a3c;
 }
 
 .page {

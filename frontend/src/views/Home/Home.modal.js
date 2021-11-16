@@ -1,10 +1,13 @@
-import "vue-material-design-icons/styles.css";
 import * as S from "./Home.styles";
-import LeftIcon from "vue-material-design-icons/ChevronLeftCircle";
-import RightIcon from "vue-material-design-icons/ChevronRightCircle";
-import PlusIcon from "vue-material-design-icons/PlusCircle";
-import MinusIcon from "vue-material-design-icons/MinusCircle";
+import { Text, PrimaryButton } from "../../components/Buttons/Buttons.styles";
+import MinusIcon from "../../assets/icons/minus.svg";
+import NextIcon from "../../assets/icons/next.svg";
+import PlusIcon from "../../assets/icons/plus.svg";
+import DownloadIcon from "../../assets/icons/download.svg";
+import CommentIcon from "../../assets/icons/comment.svg";
+import LogoIcon from "../../assets/icons/logo-sbg.svg";
 import Flipbook from "../../components/Flipbook/Flipbook";
+import Comments from "../../components/Comments/Comments";
 import axios from "axios";
 import router from "../../router";
 import store from "../../store/index";
@@ -12,11 +15,16 @@ import store from "../../store/index";
 export default {
   name: "home",
   components: {
+    Text,
+    PrimaryButton,
     Flipbook,
-    LeftIcon,
-    RightIcon,
+    NextIcon,
     PlusIcon,
     MinusIcon,
+    DownloadIcon,
+    CommentIcon,
+    LogoIcon,
+    Comments,
     ...S,
   },
   data() {
@@ -25,6 +33,7 @@ export default {
       pagesHiRes: [],
       hasMouse: true,
       pageNum: null,
+      user: store.state.isLoggedIn,
     };
   },
   methods: {

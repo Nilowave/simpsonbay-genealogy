@@ -1,5 +1,6 @@
-import styled from "vue3-styled-components";
+import styled, { css } from "vue3-styled-components";
 import { typestyles } from "../../styles/typestyles";
+import { PrimaryButton } from "../../components/Atoms/Atoms.styles";
 
 export const PageWrapper = styled.main`
   height: 100%;
@@ -35,9 +36,9 @@ export const Container = styled.div`
   position: relative;
   display: flex;
   max-width: 140rem;
-  max-height: 81rem;
-  width: 80%;
-  height: 80%;
+  max-height: 90vh;
+  width: 90%;
+  height: 90%;
   background-color: ${({ theme }) => theme.colors.offwhite};
   border-radius: 1.5rem;
 `;
@@ -48,6 +49,31 @@ export const StyledPicture = styled.div`
   background: url("/images/bridge.jpg") no-repeat center;
   background-size: cover;
   border-radius: 1.5rem 0 0 1.5rem;
+`;
+
+export const IntroWrapper = styled.div`
+  ${typestyles.bodyMedium};
+  width: 100%;
+  color: ${({ theme }) => theme.colors.crimson};
+  white-space: pre;
+  white-space: break-spaces;
+  text-align: justify;
+  position: relative;
+
+  &:before {
+    content: url("/images/feather.svg");
+    position: absolute;
+    top: 0%;
+    left: 0;
+    transform: translate(-10%, -35%);
+    opacity: 0.25;
+    width: 20%;
+    max-width: 9rem;
+  }
+
+  @media (min-width: 1400px) {
+    max-width: 80%;
+  }
 `;
 
 export const Wrapper = styled.div`
@@ -62,12 +88,23 @@ export const FlexWrapper = styled.div`
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  padding: 5rem 6rem 10rem;
+  gap: 2rem;
+  padding: 3%;
+
+  @media (min-width: 768px) {
+    gap: 3rem;
+    padding: 5%;
+  }
+
+  @media (min-width: 1200px) {
+    gap: 5rem;
+    padding: 6rem;
+  }
 `;
 
 export const Logo = styled.img`
-  width: 29rem;
-  margin-bottom: 20%;
+  max-width: 29rem;
+  /* margin-bottom: 20%; */
 `;
 
 export const Heading = styled.h2`
@@ -112,8 +149,12 @@ export const StyledInput = styled.input`
 
 export const Error = styled.p`
   ${typestyles.button};
-  color: red;
+  color: ${({ theme }) => theme.colors.red};
   position: absolute;
   width: 100%;
   margin: 0.5rem;
+`;
+
+export const ContinueButton = styled(PrimaryButton)`
+  max-width: 28rem;
 `;

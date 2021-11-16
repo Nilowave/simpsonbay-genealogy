@@ -7,10 +7,33 @@ export const typestyles = {
     font-family: ${({ theme }) => theme.fonts.baskerville};
     font-weight: 700;
   `,
-  body: css`
-    font-size: 1.8rem;
+  bodyBold: css`
+    --fs-min: var(--font-size-16);
+    --fs-val: 1.12vw;
+    --fs-max: var(--font-size-18);
+    font-size: clamp(var(--fs-min), var(--fs-val), var(--fs-max));
     font-family: ${({ theme }) => theme.fonts.gillSans};
     line-height: 1.2;
+    font-weight: 600;
+    font-style: normal;
+  `,
+  body: css`
+    --fs-min: var(--font-size-16);
+    --fs-val: 1.12vw;
+    --fs-max: var(--font-size-18);
+    font-size: clamp(var(--fs-min), var(--fs-val), var(--fs-max));
+    font-family: ${({ theme }) => theme.fonts.gillSans};
+    line-height: 1.2;
+    font-weight: 400;
+    font-style: normal;
+  `,
+  bodyMedium: css`
+    --fs-min: calc(14 / 16 * 1rem);
+    --fs-val: 1vw;
+    --fs-max: var(--font-size-16);
+    font-size: clamp(var(--fs-min), var(--fs-val), var(--fs-max));
+    font-family: ${({ theme }) => theme.fonts.gillSans};
+    line-height: 1.5;
     font-weight: 400;
     font-style: normal;
   `,
