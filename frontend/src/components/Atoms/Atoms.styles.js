@@ -6,7 +6,7 @@ export const PrimaryButton = styled.button`
   background-color: ${({ theme }) => theme.colors.green};
   border-radius: 0.5rem;
   color: ${({ theme }) => theme.colors.white};
-  padding: 1.4rem;
+  padding: 1.2rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -14,8 +14,14 @@ export const PrimaryButton = styled.button`
   width: 100%;
   transition: background-color 0.3s ease;
 
-  &:hover {
-    background-color: ${({ theme }) => theme.colors.darkgreen};
+  @media (hover: hover) {
+    &:hover {
+      background-color: ${({ theme }) => theme.colors.darkgreen};
+    }
+  }
+
+  @media (min-width: 768px) {
+    padding: 1.4rem;
   }
 `;
 
@@ -26,7 +32,6 @@ export const SecondaryButton = styled.button`
   padding: 1.4rem;
   display: flex;
   justify-content: center;
-  width: 100%;
   transition: color 0.3s ease;
 
   &:hover {
@@ -34,16 +39,30 @@ export const SecondaryButton = styled.button`
   }
 `;
 
-const TextProps = { typeStyle: String, color: String, margin: String };
+const TextProps = {
+  typeStyle: String,
+  color: String,
+  margin: String,
+  align: String,
+};
 export const Text = styled("p", TextProps)`
   ${(props) => props.typeStyle && typestyles[props.typeStyle]};
-  ${(props) => props.color && `color:${props.theme.colors[props.color]};`};
-  ${(props) => props.margin && `margin:${props.margin};`};
+  ${(props) => props.color && `color: ${props.theme.colors[props.color]};`};
+  ${(props) => props.margin && `margin: ${props.margin};`};
+  ${(props) => props.align && `text-align: ${props.align};`};
 `;
 
-const flexProps = { gap: String, justify: String, direction: String };
+const flexProps = {
+  gap: String,
+  justify: String,
+  align: String,
+  direction: String,
+  margin: String,
+};
 export const Flex = styled("div", flexProps)`
   display: flex;
+  position: relative;
+  flex: 1;
 
   ${(props) => css`
     gap: ${props.gap || "0"};
@@ -51,4 +70,5 @@ export const Flex = styled("div", flexProps)`
     align-items: ${props.align};
     flex-direction: ${props.direction};
   `};
+  ${(props) => props.margin && `margin: ${props.margin};`};
 `;

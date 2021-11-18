@@ -1,6 +1,6 @@
 import * as S from "./Register.styles";
 import * as L from "../Login/Login.styles";
-import * as Buttons from "../../components/Buttons/Buttons.styles.js";
+import * as Atoms from "../../components/Atoms/Atoms.styles.js";
 import { useForm } from "vue-hooks-form";
 import store from "../../store";
 import axios from "axios";
@@ -8,7 +8,7 @@ import router from "../../router";
 import { useMessage } from "../../hooks/useMessage";
 
 export default {
-  components: { ...L, ...S, ...Buttons },
+  components: { ...L, ...S, ...Atoms },
   setup() {
     const invite = store.state.invite;
     const { message, setMessage } = useMessage();

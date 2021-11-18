@@ -2,9 +2,11 @@ import { normalize } from "polished";
 import { injectGlobal } from "vue-styled-components";
 import { theme } from "./theme";
 import { typestyles } from "./typestyles";
+import { transitions } from "./transitions";
 
 injectGlobal`
-	${normalize()}
+	${normalize()};
+	${transitions};
 
 	html {
     -webkit-text-size-adjust: 100%;
@@ -87,24 +89,6 @@ injectGlobal`
     transform: scaleX(-1);
   }
 
-  .v-enter-from {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-
-  .v-leave-to {
-    opacity: 0;
-    transform: translateX(20px);
-  }
-
-  .v-enter-active {
-    transition: all 0.3s ease-out;
-  }
-
-  .v-leave-active {
-    transition: all 0.3s ease-in;
-  }
-
   .large {
     font-family: ${theme.fonts.baskerville};
     ${typestyles.h2};
@@ -113,6 +97,23 @@ injectGlobal`
   }
 
   .icon-16 {
-    width: 1.6rem;
+    width: 1.4rem;
+    flex-shrink: 1;
+    
+    @media (min-width: 768px) {
+      width: 1.6rem;
+    }
+  }
+
+  *::-webkit-scrollbar {
+    width: 0.5rem;
+    height: 0.5rem;
+  }
+  *::-webkit-scrollbar-thumb {
+    background: ${theme.colors.green};
+    border-radius: 0.5rem;
+  }
+  *::-webkit-scrollbar-track {
+    background: transparent;
   }
 `;

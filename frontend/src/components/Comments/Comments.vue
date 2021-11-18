@@ -9,13 +9,29 @@
           <ChevronIcon class="mirror" />
         </ArrowButton>
       </NavButtons>
-      <HeaderTitle align>Comments on page 10</HeaderTitle>
-      <CloseButton><CloseIcon /></CloseButton>
+      <HeaderTitle align>Comments on page {{ page }}</HeaderTitle>
+      <CloseButton @click="onClose"><CloseIcon /></CloseButton>
     </HeaderNav>
-    <CommentsWrapper> comments </CommentsWrapper>
-    <InputWrapper gap="1.5rem" align="center"
-      ><StyledIcon /><input type="text" placeholder="comment..."
-    /></InputWrapper>
+    <CommentsWrapper direction="column">
+      <CommentsList>
+        <CommentItem
+          v-for="item in items"
+          :color="stringToColour(item.name)"
+          :key="item.comment"
+        >
+          <Flex gap="2rem" align="center" margin="0 0 1rem">
+            <Text typeStyle="bodyBold">{{ item.name }}</Text>
+            <Text typeStyle="note">{{ item.time }}</Text>
+          </Flex>
+          <Text color="darkgrey">{{ item.comment }}</Text>
+        </CommentItem>
+      </CommentsList>
+    </CommentsWrapper>
+    <InputWrapper gap="1.5rem" align="center">
+      <StyledIcon class="mirror" />
+      <StyledTextarea placeholder="comment..." />
+      <SecondaryButton>Submit</SecondaryButton>
+    </InputWrapper>
   </Wrapper>
 </template>
 

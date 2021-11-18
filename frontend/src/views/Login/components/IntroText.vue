@@ -1,10 +1,14 @@
 <template>
-  <Flex gap="6rem" direction="column" align="center">
-    <IntroWrapper v-html="text" />
-    <ContinueButton @click="onShowSignIn"
-      >Continue to Sign in <Arrow class="arrow"
-    /></ContinueButton>
-  </Flex>
+  <Wrapper direction="column" justify="space-between" align="center">
+    <Flex direction="column" justify="space-between" align="center">
+      <FeatherWrapper><FeatherIcon /></FeatherWrapper>
+      <IntroWrapper v-html="text" />
+      <ContinueButton @click="onShowSignIn">
+        Continue to Sign in
+        <Arrow class="arrow" />
+      </ContinueButton>
+    </Flex>
+  </Wrapper>
 </template>
 
 <style scoped>
@@ -15,10 +19,12 @@
 
 <script>
 import * as S from "../Login.styles";
+import { Flex } from "../../../components/Atoms/Atoms.styles";
 import Arrow from "../../../assets/icons/long-arrow.svg";
+import FeatherIcon from "../../../assets/icons/feather.svg";
 
 export default {
-  components: { ...S, Arrow },
+  components: { ...S, Arrow, Flex, FeatherIcon },
   props: {
     onShowSignIn: {
       type: Function,

@@ -1,6 +1,6 @@
 import styled, { css } from "vue3-styled-components";
 import { typestyles } from "../../styles/typestyles";
-import { PrimaryButton } from "../../components/Atoms/Atoms.styles";
+import { PrimaryButton, Flex } from "../../components/Atoms/Atoms.styles";
 
 export const PageWrapper = styled.main`
   height: 100%;
@@ -35,8 +35,8 @@ export const GreenOverlay = styled.div`
 export const Container = styled.div`
   position: relative;
   display: flex;
-  max-width: 140rem;
-  max-height: 90vh;
+  max-width: 160rem;
+  max-height: 90rem;
   width: 90%;
   height: 90%;
   background-color: ${({ theme }) => theme.colors.offwhite};
@@ -54,57 +54,42 @@ export const StyledPicture = styled.div`
 export const IntroWrapper = styled.div`
   ${typestyles.bodyMedium};
   width: 100%;
+  max-height: 88%;
+  max-width: 56rem;
   color: ${({ theme }) => theme.colors.crimson};
-  white-space: pre;
   white-space: break-spaces;
   text-align: justify;
   position: relative;
-
-  &:before {
-    content: url("/images/feather.svg");
-    position: absolute;
-    top: 0%;
-    left: 0;
-    transform: translate(-10%, -35%);
-    opacity: 0.25;
-    width: 20%;
-    max-width: 9rem;
-  }
-
-  @media (min-width: 1400px) {
-    max-width: 80%;
-  }
+  overflow-y: auto;
 `;
 
-export const Wrapper = styled.div`
+export const Wrapper = styled(Flex)`
   width: 100%;
   text-align: center;
-  max-width: 40rem;
+  flex: 1;
+  position: relative;
 `;
 
 export const FlexWrapper = styled.div`
   width: 50%;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   align-items: center;
-  gap: 2rem;
   padding: 3%;
 
   @media (min-width: 768px) {
-    gap: 3rem;
     padding: 5%;
   }
 
   @media (min-width: 1200px) {
-    gap: 5rem;
     padding: 6rem;
   }
 `;
 
 export const Logo = styled.img`
   max-width: 29rem;
-  /* margin-bottom: 20%; */
+  margin: 2.5% 0 9%;
 `;
 
 export const Heading = styled.h2`
@@ -120,9 +105,12 @@ export const Paragraph = styled.p`
 `;
 
 export const StyledForm = styled.form`
+  margin: 0 auto;
   margin-top: 10%;
   display: flex;
   flex-direction: column;
+  max-width: 40rem;
+  width: 100%;
   gap: 4rem;
 `;
 
@@ -157,4 +145,15 @@ export const Error = styled.p`
 
 export const ContinueButton = styled(PrimaryButton)`
   max-width: 28rem;
+`;
+
+export const FeatherWrapper = styled.div`
+  position: absolute;
+  z-index: 0;
+  top: -6%;
+  left: -4%;
+  /* transform: translate(0%, -30%); */
+  opacity: 0.25;
+  width: 20%;
+  max-width: 9rem;
 `;

@@ -1,5 +1,5 @@
 <template>
-  <Wrapper>
+  <Wrapper direction="column" justify="center">
     <Heading>Sign-in</Heading>
     <Paragraph>To read the family book</Paragraph>
     <StyledForm @submit="onSubmit">
@@ -31,10 +31,10 @@
 
 <script>
 import * as S from "../Login.styles";
-import * as Buttons from "../../../components/Buttons/Buttons.styles";
+import * as Atoms from "../../../components/Atoms/Atoms.styles";
 
 export default {
-  components: { ...S, ...Buttons },
+  components: { ...S, ...Atoms },
   props: {
     onSubmit: {
       type: Function,

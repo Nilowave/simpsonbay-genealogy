@@ -19,7 +19,7 @@
       class="flipbook"
       :pages="pages"
       :pagesHiRes="pagesHiRes"
-      :startPage="pageNum"
+      :startPage="pageNumber"
       v-slot="flipbook"
       ref="flipbook"
       @flip-left-start="onFlipLeftStart"
@@ -30,42 +30,71 @@
       @zoom-end="onZoomEnd"
     >
       <ActionBar>
-        <CommentsButton
-          >Leave a comment <CommentIcon class="icon-16"
-        /></CommentsButton>
-        <ControlButton
-          :class="{ disabled: !flipbook.canZoomOut }"
-          @click="flipbook.zoomOut"
-          ><MinusIcon />Zoom out</ControlButton
-        >
+        <CommentsButton @click="showComments = true">
+          <span>Leave a comment</span>
+          <CommentIcon class="icon-16" />
+        </CommentsButton>
 
-        <ControlButton
-          :class="{ disabled: !flipbook.canFlipLeft }"
-          @click="flipbook.flipLeft"
-          ><NextIcon class="mirror" />Prev</ControlButton
-        >
+        <ControlSet align="center" justify="center" gap="2rem">
+          <ControlButton
+            :class="{ disabled: !flipbook.canZoomOut }"
+            @click="flipbook.zoomOut"
+          >
+            <MinusIcon class="icon-16" />
+            <span>Zoom out</span>
+          </ControlButton>
 
-        <Text typeStyle="bodyBold" color="green" margin="0 3%">
+          <ControlButton
+            :class="{ disabled: !flipbook.canFlipLeft }"
+            @click="flipbook.flipLeft"
+          >
+            <NextIcon class="mirror icon-16" />
+            <span>Prev</span>
+          </ControlButton>
+        </ControlSet>
+
+        <Text typeStyle="bodyBold" color="green" margin="0 3%" align="center">
           Page {{ flipbook.page }} of {{ flipbook.numPages }}
         </Text>
 
-        <ControlButton
-          :class="{ disabled: !flipbook.canFlipRight }"
-          @click="flipbook.flipRight"
-          >Next<NextIcon
-        /></ControlButton>
+        <ControlSet align="center" justify="center" gap="2rem">
+          <ControlButton
+            :class="{ disabled: !flipbook.canFlipRight }"
+            @click="flipbook.flipRight"
+          >
+            <span>Next</span>
+            <NextIcon class="icon-16" />
+          </ControlButton>
 
-        <ControlButton
-          :class="{ disabled: !flipbook.canZoomIn }"
-          @click="flipbook.zoomIn"
-          >Zoom in<PlusIcon
-        /></ControlButton>
+          <ControlButton
+            :class="{ disabled: !flipbook.canZoomIn }"
+            @click="flipbook.zoomIn"
+          >
+            <span>Zoom in</span>
+            <PlusIcon class="icon-16" />
+          </ControlButton>
+        </ControlSet>
 
-        <DownloadButton>Download E-book <DownloadIcon /></DownloadButton>
+        <DownloadButton>
+          <span>Download E-book</span>
+          <DownloadIcon class="icon-16" />
+        </DownloadButton>
       </ActionBar>
+      <PolicyBar justify="flex-start" align="left" gap="3rem">
+        <Text typeStyle="disclaimer">Simpsonbay Heritage © 2021</Text>
+        <Text typeStyle="disclaimer">Privacy Policy</Text>
+        <Text typeStyle="disclaimer">Terms of Use</Text>
+      </PolicyBar>
     </StyledFlipbook>
 
-    <Comments />
+    <transition name="slide-up">
+      <Comments
+        :items="comments"
+        :onClose="hideComments"
+        :page="pageNumber"
+        v-show="showComments"
+      />
+    </transition>
   </Home>
 </template>
 

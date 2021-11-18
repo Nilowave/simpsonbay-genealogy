@@ -44,17 +44,35 @@ export const typestyles = {
     font-weight: 400;
     font-style: normal;
   `,
+  note: css`
+    font-size: 1.2rem;
+    font-family: ${({ theme }) => theme.fonts.gillSans};
+    line-height: 1.2;
+    font-weight: 400;
+    font-style: italic;
+  `,
   button: css`
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     font-family: ${({ theme }) => theme.fonts.gillSans};
     line-height: 1;
     font-weight: 600;
     font-style: normal;
+
+    @media (min-width: 768px) {
+      font-size: 1.8rem;
+    }
   `,
   input: css`
     font-size: 2.4rem;
     line-height: 1.14;
     font-family: ${({ theme }) => theme.fonts.baskerville};
+    font-weight: 400;
+    font-style: italic;
+  `,
+  disclaimer: css`
+    font-size: 1.2rem;
+    /* line-height: 1; */
+    font-family: ${({ theme }) => theme.fonts.gillSans};
     font-weight: 400;
     font-style: italic;
   `,

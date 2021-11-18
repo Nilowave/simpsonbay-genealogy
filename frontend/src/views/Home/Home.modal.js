@@ -1,5 +1,5 @@
 import * as S from "./Home.styles";
-import { Text, PrimaryButton } from "../../components/Buttons/Buttons.styles";
+import * as Atoms from "../../components/Atoms/Atoms.styles";
 import MinusIcon from "../../assets/icons/minus.svg";
 import NextIcon from "../../assets/icons/next.svg";
 import PlusIcon from "../../assets/icons/plus.svg";
@@ -12,11 +12,35 @@ import axios from "axios";
 import router from "../../router";
 import store from "../../store/index";
 
+const comments = [
+  {
+    name: "Danilo Meulens",
+    comment: "Looks great!",
+    time: "now",
+  },
+  {
+    name: "Ashley Vincent",
+    comment: "Wow fancy!",
+    time: "1 day ago",
+  },
+  {
+    name: "Nirmala Meulens",
+    comment:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
+    time: "1 day ago",
+  },
+  {
+    name: "Bryan Meulens",
+    comment:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
+    time: "1 day ago",
+  },
+];
+
 export default {
   name: "home",
   components: {
-    Text,
-    PrimaryButton,
+    ...Atoms,
     Flipbook,
     NextIcon,
     PlusIcon,
@@ -29,14 +53,19 @@ export default {
   },
   data() {
     return {
+      comments,
       pages: [],
       pagesHiRes: [],
       hasMouse: true,
-      pageNum: null,
+      showComments: false,
+      pageNumber: null,
       user: store.state.isLoggedIn,
     };
   },
   methods: {
+    hideComments() {
+      this.showComments = false;
+    },
     logout() {
       axios
         .post(
@@ -102,7 +131,7 @@ export default {
     setPageFromHash() {
       const n = parseInt(window.location.hash.slice(1), 10);
       if (isFinite(n)) {
-        this.pageNum = n;
+        this.pageNumber = n;
       }
     },
   },
