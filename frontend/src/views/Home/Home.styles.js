@@ -5,6 +5,7 @@ import {
   PrimaryButton,
   Flex,
 } from "../../components/Atoms/Atoms.styles";
+import { fadeIn } from "../../styles/transitions";
 
 const sidePadding = "2rem";
 
@@ -87,6 +88,8 @@ export const StyledFlipbook = styled(Flipbook)`
   justify-content: flex-end;
   align-items: center;
   position: relative;
+
+  animation: ${fadeIn} 2s ease forwards;
 `;
 
 export const ActionBar = styled.div`

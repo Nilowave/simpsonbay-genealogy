@@ -4,7 +4,7 @@
       <FeatherWrapper><FeatherIcon /></FeatherWrapper>
       <IntroWrapper v-html="text" />
       <ContinueButton @click="onShowSignIn">
-        Continue to Sign in
+        {{ cta }}
         <Arrow class="arrow" />
       </ContinueButton>
     </Flex>
@@ -31,6 +31,7 @@ export default {
       required: true,
     },
     text: String,
+    cta: String,
   },
 };
 </script>

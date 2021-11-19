@@ -25,7 +25,8 @@
 import * as S from "../Login.styles";
 import * as Atoms from "../../../components/Atoms/Atoms.styles";
 import { useForm } from "vue-hooks-form";
-import axios from "axios";
+// TODO: on submit, validate email with backend
+// import axios from "axios";
 
 export default {
   components: { ...S, ...Atoms },

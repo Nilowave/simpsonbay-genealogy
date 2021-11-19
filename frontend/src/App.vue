@@ -1,6 +1,6 @@
 <template>
   <theme-provider :theme="theme" id="content">
-    <router-view />
+    <router-view :key="$route.path" />
   </theme-provider>
 </template>
 

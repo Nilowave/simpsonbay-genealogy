@@ -48,6 +48,10 @@ export default {
             onShowSignIn:
               this.page === "Register" ? this.showRegister : this.showSignIn,
             text: this.introText,
+            cta:
+              this.page === "Register"
+                ? "Continue to Register"
+                : "Continue to Sign in",
           };
 
         case "LoginForm":
@@ -56,7 +60,7 @@ export default {
             showForgot: this.showForgot,
           };
 
-        case "LoginForm":
+        case "ForgotPasswordForm":
           return {
             setMessage: this.setMessage,
             backToLogin: this.showSignIn,
@@ -71,7 +75,6 @@ export default {
   },
 
   data() {
-    console.log("data");
     return {
       loading: true,
       introText: "",
@@ -80,13 +83,6 @@ export default {
   },
 
   mounted() {
-    if (this.page === "Register") {
-      this.view = "RegisterForm";
-      this.loading = false;
-      console.log("mounted");
-      return;
-    }
-
     axios
       .get(`${process.env.VUE_APP_API_DOMAIN}/intro-text`)
       .then((res) => {
@@ -104,7 +100,6 @@ export default {
   },
 
   setup() {
-    console.log("setup");
     const { message, setMessage } = useMessage();
 
     return {

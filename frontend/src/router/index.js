@@ -15,8 +15,10 @@ const routes = [
     path: "/login",
     name: "Login",
     component: Login,
+    props: {
+      page: "Login",
+    },
     beforeEnter: (to, from, next) => {
-      console.log("logind page");
       if (store.state.isLoggedIn) {
         next({ name: "Home" });
       } else {
@@ -37,13 +39,10 @@ const routes = [
         axios
           .get(`${process.env.VUE_APP_API_DOMAIN}/getinvite/${to.params.id}`)
           .then((res) => {
-            store.commit("setInvite", res.data);
             next();
           })
           .catch((err) => {
-            console.log("no invite found");
-            console.log(err.response);
-            next("/login");
+            next({ name: "Login" });
           });
     },
   },
@@ -75,12 +74,9 @@ router.beforeEach((to, from, next) => {
         }
       })
       .catch((err) => {
-        console.log(err.response);
         if (to.name === "Login" || to.name === "Register") {
-          console.log(to);
           next();
         } else {
-          console.log("nope logi first");
           next({ name: "Login" });
         }
       });

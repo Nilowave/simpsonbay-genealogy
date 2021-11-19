@@ -1,4 +1,4 @@
-import { css } from "vue-styled-components";
+import { css, keyframes } from "vue-styled-components";
 
 export const transitions = css`
   .v-enter-from {
@@ -37,5 +37,15 @@ export const transitions = css`
 
   .slide-up-leave-active {
     transition: all 0.2s cubic-bezier(0.11, 0, 0.5, 0);
+  }
+`;
+
+export const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
   }
 `;

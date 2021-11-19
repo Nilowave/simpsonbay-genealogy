@@ -7,6 +7,20 @@
     <StyledForm @submit="onSubmit">
       <InputWrapper>
         <StyledInput
+          v-model="email.value"
+          :ref="email.ref"
+          type="email"
+          name="email"
+          placeholder="Email"
+          aria-disabled="true"
+          preset
+          disabled
+        />
+        <Error v-if="email.error">{{ email.error.message }}</Error>
+      </InputWrapper>
+
+      <InputWrapper>
+        <StyledInput
           v-model="name.value"
           :ref="name.ref"
           type="text"
@@ -14,19 +28,6 @@
           placeholder="Full Name"
         />
         <Error v-if="name.error">{{ name.error.message }}</Error>
-      </InputWrapper>
-
-      <InputWrapper>
-        <StyledInput
-          v-model="email.value"
-          :ref="email.ref"
-          type="email"
-          name="email"
-          placeholder="Email"
-          aria-disabled="true"
-          disabled
-        />
-        <Error v-if="email.error">{{ email.error.message }}</Error>
       </InputWrapper>
 
       <InputWrapper>
@@ -95,7 +96,7 @@ export default {
     const confirmpassword = useField("confirmpassword", {
       rule: {
         required: true,
-        message: "password does not match",
+        message: "passwords do not match",
         validator: (rule, value) => {
           if (password.value !== value || !value) {
             return false;

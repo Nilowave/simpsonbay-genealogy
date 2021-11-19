@@ -1,16 +1,7 @@
 import styled, { css, keyframes } from "vue3-styled-components";
 import { typestyles } from "../../styles/typestyles";
 import { PrimaryButton, Flex } from "../../components/Atoms/Atoms.styles";
-
-const fadeIn = keyframes`
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
-`;
+import { fadeIn } from "../../styles/transitions";
 
 export const PageWrapper = styled.main`
   height: 100%;
@@ -141,7 +132,7 @@ export const InputWrapper = styled.div`
   width: 100%;
 `;
 
-export const StyledInput = styled.input`
+export const StyledInput = styled("input", { preset: Boolean })`
   ${typestyles.input};
   width: 100%;
   border: solid 1px
@@ -151,6 +142,14 @@ export const StyledInput = styled.input`
   text-align: center;
   padding: 1.5rem;
   background-color: ${({ theme }) => theme.colors.offwhite};
+
+  ${(props) =>
+    props.preset &&
+    css`
+      border: solid 2px;
+      border-color: ${({ theme }) => theme.colors.green};
+      color: ${({ theme }) => theme.colors.green};
+    `}
 
   &::placeholder {
     color: ${({ theme }) => theme.colors.grey};
