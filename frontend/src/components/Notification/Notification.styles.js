@@ -23,21 +23,31 @@ export const Wrapper = styled.div`
   overflow: hidden;
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   animation: ${apear} 0.3s ease-out;
 `;
 
 export const NotificationText = styled.p`
   ${typestyles.bodySmall};
   padding: 1rem 2rem;
+  padding-left: 5.5rem;
   max-width: 30rem;
   font-weight: 600;
   vertical-align: middle;
 `;
 
 export const Icon = styled.div`
-  min-height: 3rem;
-  min-width: 3rem;
+  /* min-height: 3rem; */
+  /* min-width: 3rem; */
+  width: 4rem;
   padding: 1rem;
+  height: 100%;
+  /* flex: 1; */
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
   background-color: ${({ theme }) => theme.colors.red};
   color: ${({ theme }) => theme.colors.white};
 

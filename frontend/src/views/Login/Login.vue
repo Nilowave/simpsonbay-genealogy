@@ -4,7 +4,17 @@
     <GreenOverlay />
 
     <Container>
-      <StyledPicture />
+      <StyledPicture>
+        <IntroVideo
+          src="/video/bridge.mp4"
+          muted
+          autoplay
+          playsinline
+          loop
+          oncontextmenu="return false;"
+          poster="/images/bridge.jpg"
+        />
+      </StyledPicture>
       <Loader v-if="loading" />
       <FlexWrapper v-else>
         <Logo src="/images/logo-stacked.svg" alt="Simpsonbay Genealogy" />

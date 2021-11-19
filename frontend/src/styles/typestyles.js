@@ -62,6 +62,17 @@ export const typestyles = {
       font-size: 1.8rem;
     }
   `,
+  error: css`
+    font-size: 1.4rem;
+    font-family: ${({ theme }) => theme.fonts.gillSans};
+    line-height: 1;
+    font-weight: 600;
+    font-style: normal;
+
+    @media (min-width: 768px) {
+      font-size: 1.6rem;
+    }
+  `,
   input: css`
     font-size: 2.4rem;
     line-height: 1.14;

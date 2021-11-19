@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home/Home.vue";
 import Login from "../views/Login/Login.vue";
-import Register from "../views/Register/Register.vue";
 import PathNotFound from "../components/PathNotFound/PathNotFound";
 import store from "../store/index";
 import axios from "axios";
@@ -28,7 +27,10 @@ const routes = [
   {
     path: "/register/:id",
     name: "Register",
-    component: Register,
+    component: Login,
+    props: {
+      page: "Register",
+    },
     beforeEnter: (to, from, next) => {
       if (store.state.isLoggedIn) next({ name: "Home" });
       else

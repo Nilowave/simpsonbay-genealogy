@@ -1,6 +1,16 @@
-import styled, { css } from "vue3-styled-components";
+import styled, { css, keyframes } from "vue3-styled-components";
 import { typestyles } from "../../styles/typestyles";
 import { PrimaryButton, Flex } from "../../components/Atoms/Atoms.styles";
+
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+`;
 
 export const PageWrapper = styled.main`
   height: 100%;
@@ -46,9 +56,21 @@ export const Container = styled.div`
 export const StyledPicture = styled.div`
   width: 50%;
   height: 100%;
-  background: url("/images/bridge.jpg") no-repeat center;
+  background-color: ${({ theme }) => theme.colors.green};
   background-size: cover;
   border-radius: 1.5rem 0 0 1.5rem;
+  overflow: hidden;
+  position: relative;
+`;
+
+export const IntroVideo = styled.video`
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  animation: ${fadeIn} 2s ease forwards;
 `;
 
 export const IntroWrapper = styled.div`
@@ -136,11 +158,17 @@ export const StyledInput = styled.input`
 `;
 
 export const Error = styled.p`
-  ${typestyles.button};
+  ${typestyles.error};
+  font-size: 1.2rem;
   color: ${({ theme }) => theme.colors.red};
   position: absolute;
   width: 100%;
   margin: 0.5rem;
+  animation: ${fadeIn} 0.5s ease;
+
+  &:first-letter {
+    text-transform: uppercase;
+  }
 `;
 
 export const ContinueButton = styled(PrimaryButton)`

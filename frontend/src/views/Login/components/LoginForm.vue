@@ -1,7 +1,9 @@
 <template>
   <Wrapper direction="column" justify="center">
     <Heading>Sign-in</Heading>
-    <Paragraph>To read the family book</Paragraph>
+    <Paragraph
+      >To read the family book, please sign in with your credentials.</Paragraph
+    >
     <StyledForm @submit="onSubmit">
       <InputWrapper>
         <StyledInput
@@ -25,29 +27,74 @@
       </InputWrapper>
       <PrimaryButton type="submit">Sign in</PrimaryButton>
     </StyledForm>
-    <SecondaryButton>Reset password</SecondaryButton>
+    <SecondaryButton @click="showForgot">Forgot my password</SecondaryButton>
   </Wrapper>
 </template>
 
 <script>
+import { useForm } from "vue-hooks-form";
+import axios from "axios";
+import router from "../../../router";
 import * as S from "../Login.styles";
 import * as Atoms from "../../../components/Atoms/Atoms.styles";
 
 export default {
   components: { ...S, ...Atoms },
   props: {
-    onSubmit: {
+    setMessage: {
       type: Function,
-      required: true,
     },
-    email: {
-      type: Object,
-      required: true,
+    showForgot: {
+      type: Function,
     },
-    password: {
-      type: Object,
-      required: true,
-    },
+  },
+
+  setup(props) {
+    const { useField, handleSubmit } = useForm({
+      defaultValues: {},
+    });
+
+    const email = useField("email", {
+      rule: { required: true },
+    });
+
+    const password = useField("password", {
+      rule: {
+        required: true,
+        min: process.env.NODE_ENV === "production" ? 6 : 0,
+      },
+    });
+
+    const onSubmit = (data) => {
+      axios
+        .post(
+          `${process.env.VUE_APP_API_DOMAIN}/auth/local`,
+          {
+            identifier: data.email,
+            password: data.password,
+          },
+          {
+            withCredentials: true,
+          }
+        )
+        .then((res) => {
+          console.log("login succes, push /", res.data);
+          router.push("/");
+        })
+        .catch((err) => {
+          if (err.response.status === 400) {
+            props.setMessage("Incorrect email or password");
+          } else {
+            props.setMessage("There was an error. Please try again.");
+          }
+        });
+    };
+
+    return {
+      email,
+      password,
+      onSubmit: handleSubmit(onSubmit),
+    };
   },
 };
 </script>

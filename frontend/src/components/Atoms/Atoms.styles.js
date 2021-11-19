@@ -33,6 +33,7 @@ export const SecondaryButton = styled.button`
   display: flex;
   justify-content: center;
   transition: color 0.3s ease;
+  align-self: center; // maybe not a good idea to have this here?
 
   &:hover {
     color: ${({ theme }) => theme.colors.darkgreen};

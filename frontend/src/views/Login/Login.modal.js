@@ -1,49 +1,92 @@
-import * as S from "./Login.styles";
+import axios from "axios";
+import { useMessage } from "../../hooks/useMessage";
 import IntroText from "./components/IntroText";
 import LoginForm from "./components/LoginForm";
+import RegisterForm from "./components/RegisterForm";
+import ForgotPasswordForm from "./components/ForgotPasswordForm";
+import Notification from "../../components/Notification/Notification.vue";
 import { Flex } from "../../components/Atoms/Atoms.styles";
 import { Loader } from "../../components/Loader/Loader.styles";
-import { useForm } from "vue-hooks-form";
-import axios from "axios";
-import router from "../../router";
-import { useMessage } from "../../hooks/useMessage";
-import Notification from "../../components/Notification/Notification.vue";
-import store from "../../store";
+import * as S from "./Login.styles";
 
 export default {
-  components: { ...S, Notification, IntroText, LoginForm, Loader, Flex },
-  data() {
-    return {
-      view: "IntroText",
-      showIntro: true,
-      loading: true,
-      introText: "",
-    };
+  components: {
+    ...S,
+    Notification,
+    IntroText,
+    LoginForm,
+    RegisterForm,
+    ForgotPasswordForm,
+    Loader,
+    Flex,
   },
-  methods: {
-    showSignIn() {
-      this.showIntro = false;
-      this.view = "LoginForm";
-      console.log("SHOW SIGNING FORM");
+
+  props: {
+    page: {
+      type: String,
+      default: "Login",
     },
   },
+
+  methods: {
+    showSignIn() {
+      this.view = "LoginForm";
+    },
+    showForgot() {
+      this.view = "ForgotPasswordForm";
+    },
+    showRegister() {
+      this.view = "RegisterForm";
+    },
+  },
+
   computed: {
     currentProperties() {
-      if (this.view === "IntroText") {
-        return {
-          onShowSignIn: this.showSignIn,
-          text: this.introText,
-        };
-      } else if (this.view === "LoginForm") {
-        return {
-          onSubmit: this.onSubmit,
-          email: this.email,
-          password: this.password,
-        };
+      switch (this.view) {
+        case "IntroText":
+          return {
+            onShowSignIn:
+              this.page === "Register" ? this.showRegister : this.showSignIn,
+            text: this.introText,
+          };
+
+        case "LoginForm":
+          return {
+            setMessage: this.setMessage,
+            showForgot: this.showForgot,
+          };
+
+        case "LoginForm":
+          return {
+            setMessage: this.setMessage,
+            backToLogin: this.showSignIn,
+          };
+
+        case "RegisterForm":
+          return {
+            setMessage: this.setMessage,
+          };
       }
     },
   },
+
+  data() {
+    console.log("data");
+    return {
+      loading: true,
+      introText: "",
+      view: "IntroText",
+    };
+  },
+
   mounted() {
+    if (this.page === "Register") {
+      this.view = "RegisterForm";
+      this.loading = false;
+      console.log("mounted");
+      return;
+    }
+
     axios
       .get(`${process.env.VUE_APP_API_DOMAIN}/intro-text`)
       .then((res) => {
@@ -61,51 +104,12 @@ export default {
   },
 
   setup() {
+    console.log("setup");
     const { message, setMessage } = useMessage();
 
-    const { useField, handleSubmit } = useForm({
-      defaultValues: {},
-    });
-    const email = useField("email", {
-      rule: { required: true },
-    });
-    const password = useField("password", {
-      rule: {
-        required: true,
-        min: process.env.NODE_ENV === "production" ? 6 : 0,
-      },
-    });
-
-    const onSubmit = (data) => {
-      axios
-        .post(
-          `${process.env.VUE_APP_API_DOMAIN}/auth/local`,
-          {
-            identifier: data.email,
-            password: data.password,
-          },
-          {
-            withCredentials: true,
-          }
-        )
-        .then((res) => {
-          console.log("login succes, push /", res.data);
-          router.push("/");
-        })
-        .catch((err) => {
-          if (err.response.status === 400) {
-            setMessage("Incorrect email or password");
-          } else {
-            setMessage("There was an error. Please try again.");
-          }
-        });
-    };
-
     return {
-      email,
-      password,
+      setMessage,
       message,
-      onSubmit: handleSubmit(onSubmit),
     };
   },
 };
