@@ -6,7 +6,7 @@
     <Container>
       <StyledPicture>
         <IntroVideo
-          src="/video/bridge.mp4"
+          src="https://simpsonbay-heritage.s3.amazonaws.com/bridge.mp4"
           muted
           autoplay
           playsinline
