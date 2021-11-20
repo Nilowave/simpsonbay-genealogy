@@ -7,6 +7,7 @@ const store = createStore({
       isLoggedIn: false,
       invite: {},
       readPages: null,
+      resetPasswordCode: null,
     };
   },
   mutations: {
@@ -18,6 +19,9 @@ const store = createStore({
     },
     setReadPages(state, value) {
       state.readPages = value;
+    },
+    setResetPasswordCode(state, value) {
+      state.resetPasswordCode = value;
     },
   },
   actions: {

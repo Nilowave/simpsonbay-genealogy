@@ -25,8 +25,7 @@
 import * as S from "../Login.styles";
 import * as Atoms from "../../../components/Atoms/Atoms.styles";
 import { useForm } from "vue-hooks-form";
-// TODO: on submit, validate email with backend
-// import axios from "axios";
+import axios from "axios";
 
 export default {
   components: { ...S, ...Atoms },
@@ -50,8 +49,21 @@ export default {
     });
 
     const onSubmit = (data) => {
-      console.log("email sent to", data);
-      props.setMessage(`Password recovery email sent to ${data.email}`);
+      axios
+        .post(`${process.env.VUE_APP_API_DOMAIN}/auth/forgot-password`, {
+          email: data.email, // user's email
+        })
+        .then((response) => {
+          console.log("Your user received an email");
+          props.setMessage(`Password recovery email sent to ${data.email}`);
+          props.backToLogin();
+        })
+        .catch((error) => {
+          props.setMessage(
+            "There was an error sending the email. Please try again or contact info@simpsonbay-heritage.com"
+          );
+          console.log("An error occurred:", error.response);
+        });
     };
 
     return {

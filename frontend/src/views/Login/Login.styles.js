@@ -48,20 +48,24 @@ export const StyledPicture = styled.div`
   width: 50%;
   height: 100%;
   background-color: ${({ theme }) => theme.colors.green};
+  background: url("/images/bridge.jpg") center;
   background-size: cover;
   border-radius: 1.5rem 0 0 1.5rem;
   overflow: hidden;
   position: relative;
 `;
 
-export const IntroVideo = styled.video`
+export const IntroVideo = styled("video", { isReady: Boolean })`
   height: 100%;
   position: absolute;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
   opacity: 0;
-  animation: ${fadeIn} 2s ease forwards;
+
+  ${(props) =>
+    props.isReady &&
+    `animation: ${fadeIn} 2s ease forwards;`}/* animation: ${fadeIn} 2s ease forwards; */
 `;
 
 export const IntroWrapper = styled.div`

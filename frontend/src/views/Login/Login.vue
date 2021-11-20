@@ -6,13 +6,14 @@
     <Container>
       <StyledPicture>
         <IntroVideo
-          src="https://simpsonbay-heritage.s3.amazonaws.com/bridge.mp4"
+          src="https://simpsonbay-heritage.s3.amazonaws.com/bridge_43f39692c0.mp4"
           muted
           autoplay
           playsinline
           loop
           oncontextmenu="return false;"
-          poster="/images/bridge.jpg"
+          :isReady="videoready"
+          @playing="videoready = true"
         />
       </StyledPicture>
       <Loader v-if="loading" />

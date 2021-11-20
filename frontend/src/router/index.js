@@ -27,6 +27,21 @@ const routes = [
     },
   },
   {
+    path: "/reset-password",
+    name: "ResetPassword",
+    component: Login,
+    props: {
+      page: "ResetPassword",
+    },
+    beforeEnter: (to, from, next) => {
+      if (store.state.isLoggedIn) {
+        next({ name: "Home" });
+      } else {
+        next();
+      }
+    },
+  },
+  {
     path: "/register/:id",
     name: "Register",
     component: Login,
@@ -70,11 +85,19 @@ router.beforeEach((to, from, next) => {
           store.commit("setReadPages", res.data.readPages);
           next();
         } else {
-          next({ name: "Login" });
+          if (to.name === "ResetPassword") {
+            next();
+          } else {
+            next({ name: "Login" });
+          }
         }
       })
       .catch((err) => {
-        if (to.name === "Login" || to.name === "Register") {
+        if (
+          to.name === "Login" ||
+          to.name === "Register" ||
+          to.name === "ResetPassword"
+        ) {
           next();
         } else {
           next({ name: "Login" });

@@ -4,6 +4,7 @@ import IntroText from "./components/IntroText";
 import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/RegisterForm";
 import ForgotPasswordForm from "./components/ForgotPasswordForm";
+import ResetPasswordForm from "./components/ResetPasswordForm";
 import Notification from "../../components/Notification/Notification.vue";
 import { Flex } from "../../components/Atoms/Atoms.styles";
 import { Loader } from "../../components/Loader/Loader.styles";
@@ -17,6 +18,7 @@ export default {
     LoginForm,
     RegisterForm,
     ForgotPasswordForm,
+    ResetPasswordForm,
     Loader,
     Flex,
   },
@@ -66,6 +68,12 @@ export default {
             backToLogin: this.showSignIn,
           };
 
+        case "ResetPasswordForm":
+          return {
+            setMessage: this.setMessage,
+            backToLogin: this.showSignIn,
+          };
+
         case "RegisterForm":
           return {
             setMessage: this.setMessage,
@@ -77,12 +85,17 @@ export default {
   data() {
     return {
       loading: true,
+      videoready: false,
       introText: "",
       view: "IntroText",
     };
   },
 
   mounted() {
+    if (this.page === "ResetPassword") {
+      this.view = "ResetPasswordForm";
+    }
+
     axios
       .get(`${process.env.VUE_APP_API_DOMAIN}/intro-text`)
       .then((res) => {
