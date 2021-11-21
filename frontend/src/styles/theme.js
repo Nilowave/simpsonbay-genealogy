@@ -23,8 +23,8 @@ export const theme = {
     gillSans: "gill-sans-nova",
   },
   sitePaddings: {
-    mobile: "3rem",
-    desktop: "10.2rem",
+    mobile: "2rem",
+    desktop: "2rem",
   },
   utils: {
     hexToRgba,

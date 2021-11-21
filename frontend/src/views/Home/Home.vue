@@ -80,11 +80,9 @@
           <DownloadIcon class="icon-16" />
         </DownloadButton>
       </ActionBar>
-      <PolicyBar justify="flex-start" align="left" gap="3rem">
-        <Text typeStyle="disclaimer">Simpsonbay Heritage © 2021</Text>
-        <Text typeStyle="disclaimer">Privacy Policy</Text>
-        <Text typeStyle="disclaimer">Terms of Use</Text>
-      </PolicyBar>
+      <PolicyBarWrapper>
+        <PolicyBar color="green" :showModal="showModal" />
+      </PolicyBarWrapper>
     </StyledFlipbook>
 
     <transition name="slide-up">

@@ -8,6 +8,7 @@ import CommentIcon from "../../assets/icons/comment.svg";
 import LogoIcon from "../../assets/icons/logo-sbg.svg";
 import Flipbook from "../../components/Flipbook/Flipbook";
 import Comments from "../../components/Comments/Comments";
+import PolicyBar from "../../components/PolicyBar/PolicyBar";
 import axios from "axios";
 import router from "../../router";
 import store from "../../store/index";
@@ -39,9 +40,13 @@ const comments = [
 
 export default {
   name: "home",
+  props: {
+    showModal: Function,
+  },
   components: {
     ...Atoms,
     Flipbook,
+    PolicyBar,
     NextIcon,
     PlusIcon,
     MinusIcon,

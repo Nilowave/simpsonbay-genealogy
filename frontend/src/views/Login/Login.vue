@@ -25,6 +25,10 @@
         <Notification :message="message" />
       </FlexWrapper>
     </Container>
+
+    <PolicyBarWrapper>
+      <PolicyBar color="white" :showModal="showModal" />
+    </PolicyBarWrapper>
   </PageWrapper>
 </template>
 

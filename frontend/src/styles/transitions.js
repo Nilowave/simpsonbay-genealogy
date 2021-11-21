@@ -38,6 +38,18 @@ export const transitions = css`
   .slide-up-leave-active {
     transition: all 0.2s cubic-bezier(0.11, 0, 0.5, 0);
   }
+
+  /* fade */
+
+  .fade-leave-to,
+  .fade-enter-from {
+    opacity: 0;
+  }
+
+  .fade-leave-active,
+  .fade-enter-active {
+    transition: all 0.7s ease;
+  }
 `;
 
 export const fadeIn = keyframes`

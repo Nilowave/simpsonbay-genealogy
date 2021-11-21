@@ -54,6 +54,7 @@ const routes = [
         axios
           .get(`${process.env.VUE_APP_API_DOMAIN}/getinvite/${to.params.id}`)
           .then((res) => {
+            store.commit("setInvite", res.data);
             next();
           })
           .catch((err) => {

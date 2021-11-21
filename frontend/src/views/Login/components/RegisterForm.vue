@@ -73,6 +73,7 @@ export default {
   setup() {
     console.log("register");
     const invite = store.state.invite;
+    console.log(invite.email);
 
     const { useField, handleSubmit } = useForm({
       defaultValues: { email: invite.email },

@@ -7,6 +7,12 @@ export const typestyles = {
     font-family: ${({ theme }) => theme.fonts.baskerville};
     font-weight: 700;
   `,
+  h3: css`
+    font-size: 2.4rem;
+    line-height: 1.5;
+    font-family: ${({ theme }) => theme.fonts.gillSans};
+    font-weight: 600;
+  `,
   bodyBold: css`
     --fs-min: var(--font-size-16);
     --fs-val: 1.12vw;

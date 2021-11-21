@@ -183,8 +183,17 @@ export const FeatherWrapper = styled.div`
   z-index: 0;
   top: -6%;
   left: -4%;
-  /* transform: translate(0%, -30%); */
   opacity: 0.25;
   width: 20%;
   max-width: 9rem;
+`;
+
+export const PolicyBarWrapper = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  max-width: 160rem;
+  width: 90%;
+  margin: auto;
 `;

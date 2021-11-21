@@ -7,8 +7,6 @@ import {
 } from "../../components/Atoms/Atoms.styles";
 import { fadeIn } from "../../styles/transitions";
 
-const sidePadding = "2rem";
-
 export const Home = styled.main`
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -49,7 +47,7 @@ export const Logo = styled.div`
   width: 25%;
   position: absolute;
   top: 2.2rem;
-  left: ${sidePadding};
+  left: ${({ theme }) => theme.sitePaddings.mobile};
 
   svg {
     width: 100%;
@@ -61,8 +59,8 @@ export const UsernameWrapper = styled.div`
   position: absolute;
   top: 0;
   right: 0;
-  margin: 1.5rem ${sidePadding};
-  z-index: 99;
+  margin: 1.5rem ${({ theme }) => theme.sitePaddings.mobile};
+  z-index: 10;
 `;
 
 export const Username = styled.p`
@@ -94,7 +92,7 @@ export const StyledFlipbook = styled(Flipbook)`
 
 export const ActionBar = styled.div`
   width: 100%;
-  padding: 1.3rem ${sidePadding};
+  padding: 1.3rem ${({ theme }) => theme.sitePaddings.mobile};
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -171,7 +169,7 @@ export const DownloadButton = styled(PrimaryButton)`
   margin-left: auto;
   width: auto;
   position: absolute;
-  right: ${sidePadding};
+  right: ${({ theme }) => theme.sitePaddings.mobile};
   bottom: 21.3rem;
 
   @media (min-width: 768px) {
@@ -187,12 +185,12 @@ export const CommentsButton = styled(PrimaryButton)`
   margin-right: auto;
   width: auto;
   position: absolute;
-  right: ${sidePadding};
+  right: ${({ theme }) => theme.sitePaddings.mobile};
   bottom: 27.3rem;
 
   @media (min-width: 520px) {
     bottom: 21.3rem;
-    left: ${sidePadding};
+    left: ${({ theme }) => theme.sitePaddings.mobile};
     right: auto;
   }
 
@@ -205,10 +203,8 @@ export const CommentsButton = styled(PrimaryButton)`
   }
 `;
 
-export const PolicyBar = styled(Flex)`
+export const PolicyBarWrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
-  color: ${({ theme }) => theme.colors.green};
-  padding: 1rem ${sidePadding};
   width: 100%;
   border-top: dashed 1px ${({ theme }) => theme.colors.lightgrey};
 `;

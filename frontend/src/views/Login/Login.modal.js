@@ -6,6 +6,7 @@ import RegisterForm from "./components/RegisterForm";
 import ForgotPasswordForm from "./components/ForgotPasswordForm";
 import ResetPasswordForm from "./components/ResetPasswordForm";
 import Notification from "../../components/Notification/Notification.vue";
+import PolicyBar from "../../components/PolicyBar/PolicyBar";
 import { Flex } from "../../components/Atoms/Atoms.styles";
 import { Loader } from "../../components/Loader/Loader.styles";
 import * as S from "./Login.styles";
@@ -14,6 +15,7 @@ export default {
   components: {
     ...S,
     Notification,
+    PolicyBar,
     IntroText,
     LoginForm,
     RegisterForm,
@@ -28,6 +30,7 @@ export default {
       type: String,
       default: "Login",
     },
+    showModal: Function,
   },
 
   methods: {
@@ -112,7 +115,7 @@ export default {
       });
   },
 
-  setup() {
+  setup(props) {
     const { message, setMessage } = useMessage();
 
     return {
