@@ -59,11 +59,10 @@ export const CloseButton = styled.button`
   justify-content: center;
   align-items: center;
   color: ${({ theme }) => theme.colors.black};
-  transition: color 0.4s ease;
 
   @media (hover: hover) {
     &:hover {
-      color: ${({ theme }) => theme.colors.red};
+      color: ${({ theme }) => theme.colors.green};
     }
   }
 `;

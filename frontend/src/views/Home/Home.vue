@@ -30,7 +30,7 @@
       @zoom-end="onZoomEnd"
     >
       <ActionBar>
-        <CommentsButton @click="showComments = true">
+        <CommentsButton v-if="bookLink" @click="showComments = true">
           <span>Leave a comment</span>
           <CommentIcon class="icon-16" />
         </CommentsButton>
@@ -77,6 +77,7 @@
 
         <DownloadButton
           as="a"
+          v-if="bookLink"
           :href="bookLink"
           download="Simpsonbay-Heritage-E-book.pdf"
           target="_blank"
