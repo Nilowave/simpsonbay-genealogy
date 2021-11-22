@@ -90,6 +90,7 @@ export default {
       loading: true,
       videoready: false,
       introText: "",
+      introVideo: null,
       view: "IntroText",
     };
   },
@@ -106,6 +107,7 @@ export default {
           res.data.text.substring(0, 1),
           `<span class="large">${res.data.text.substring(0, 1)}</span>`
         );
+        this.introVideo = res.data.video.url;
       })
       .catch((error) => {
         console.log(error);

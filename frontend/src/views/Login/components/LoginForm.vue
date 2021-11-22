@@ -78,7 +78,7 @@ export default {
           }
         )
         .then((res) => {
-          console.log("login succes, push /", res.data);
+          console.log("login success, push /", res.data);
           router.push("/");
         })
         .catch((err) => {

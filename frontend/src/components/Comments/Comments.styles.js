@@ -1,7 +1,8 @@
 import styled from "vue3-styled-components";
-import { Flex, Text } from "../Atoms/Atoms.styles";
+import { Flex } from "../Atoms/Atoms.styles";
 import CommentIcon from "../../assets/icons/comment.svg";
 import { typestyles } from "../../styles/typestyles";
+import Notification from "../Notification/Notification";
 
 export const Wrapper = styled.div`
   position: fixed;
@@ -28,7 +29,9 @@ export const HeaderNav = styled(Flex)`
   border-bottom: solid 1px ${({ theme }) => theme.colors.lightgrey};
 `;
 
-export const NavButtons = styled(Flex)``;
+export const NavButtons = styled(Flex)`
+  flex-grow: 0;
+`;
 
 export const ArrowButton = styled.button`
   padding: 0.5rem;
@@ -42,9 +45,11 @@ export const ArrowButton = styled.button`
   }
 `;
 
-export const HeaderTitle = styled(Text)`
+export const HeaderTitle = styled.h4`
+  ${typestyles.bodyBold};
   flex: 1;
   align-self: center;
+  margin-left: 2rem;
 `;
 
 export const CloseButton = styled.button`
@@ -64,7 +69,7 @@ export const CloseButton = styled.button`
 `;
 
 export const CommentsWrapper = styled(Flex)`
-  padding: 3rem 1.5rem;
+  padding: 1rem 0;
   overflow-y: auto;
   max-height: 30vh;
 
@@ -79,23 +84,30 @@ export const CommentsWrapper = styled(Flex)`
 export const CommentsList = styled.ul`
   display: flex;
   flex-direction: column;
-  gap: 3rem;
 `;
 
-export const CommentItem = styled("li", { color: String })`
-  padding-left: 3.4rem;
+export const CommentItem = styled("li", { color: String, isAuthor: Boolean })`
+  padding: 1.5rem;
+  padding-left: 4rem;
   position: relative;
+  ${({ isAuthor, theme }) => isAuthor && `color: ${theme.colors.green}`};
+  ${({ isAuthor, theme }) =>
+    isAuthor &&
+    `background-color: ${theme.utils.hexToRgba(theme.colors.green, 0.05)}`};
 
   &:before {
     content: "";
     position: absolute;
-    width: 1rem;
-    height: 1rem;
-    border: solid 3px ${(props) => props.color};
+    width: ${({ isAuthor }) => (isAuthor ? "2px" : "1rem")};
+    height: ${({ isAuthor }) => (isAuthor ? "calc(100% - 3rem)" : "1rem")};
+    border: ${({ isAuthor, color }) => !isAuthor && `solid 3px ${color}`};
     border-radius: 1rem;
-    left: 1rem;
-    top: 0.6rem;
+    top: ${({ isAuthor }) => (isAuthor ? "1.5rem" : "2.1rem")};
+    left: 2rem;
+    ${({ isAuthor, color }) => isAuthor && `background-color: ${color}`};
   }
+
+  transition: all 0.5s ease;
 `;
 
 export const StyledIcon = styled(CommentIcon)`
@@ -103,6 +115,7 @@ export const StyledIcon = styled(CommentIcon)`
   color: ${({ theme }) => theme.colors.green};
   opacity: 0.2;
   transition: opacity 0.5s ease;
+  margin-right: 1.5rem;
 `;
 
 export const InputWrapper = styled(Flex)`
@@ -124,7 +137,7 @@ export const StyledTextarea = styled.textarea`
   flex: 1;
   outline: none;
   border: solid 2px transparent;
-  border-radius: 3px;
+  border-radius: 6px;
   resize: none;
   padding: 0.5rem;
   transition: border-color 0.5s ease;
@@ -132,5 +145,62 @@ export const StyledTextarea = styled.textarea`
   &:focus-visible {
     border: solid 2px
       ${({ theme }) => theme.utils.hexToRgba(theme.colors.green, 0.5)};
+    &::placeholder {
+      color: transparent;
+    }
   }
+
+  &::placeholder {
+    line-height: 3.8rem;
+    transition: color 0.3s ease;
+  }
+`;
+
+export const DeleteButton = styled.button`
+  margin-left: auto;
+  text-decoration: underline;
+  > * {
+    font-weight: 600;
+  }
+`;
+
+export const EmptyList = styled.div`
+  margin: 1rem 2rem 0;
+  padding: 2rem;
+  background-color: ${({ theme }) => theme.colors.metawhite};
+  color: ${({ theme }) => theme.colors.midgrey};
+  text-align: center;
+`;
+
+export const ConfirmDialog = styled(Flex)`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  padding: 1.5rem;
+  text-align: center;
+
+  p {
+    position: relative;
+  }
+
+  &:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0.9;
+    background-color: ${({ theme }) => theme.colors.white};
+    z-index: 0;
+  }
+`;
+
+export const StyledNotification = styled(Notification)`
+  margin: auto;
+  left: 0;
+  right: 0;
+  max-width: 33rem;
 `;

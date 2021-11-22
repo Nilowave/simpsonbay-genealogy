@@ -1,7 +1,7 @@
 <template>
   <Wrapper>
     <HeaderNav justify="space-between" gap="1.5rem">
-      <NavButtons gap="0.8rem">
+      <NavButtons v-show="false" gap="0.8rem">
         <ArrowButton>
           <ChevronIcon />
         </ArrowButton>
@@ -9,29 +9,74 @@
           <ChevronIcon class="mirror" />
         </ArrowButton>
       </NavButtons>
-      <HeaderTitle align>Comments on page {{ page }}</HeaderTitle>
+      <HeaderTitle>Comments on Page {{ page }}</HeaderTitle>
       <CloseButton @click="onClose"><CloseIcon /></CloseButton>
     </HeaderNav>
     <CommentsWrapper direction="column">
-      <CommentsList>
-        <CommentItem
-          v-for="item in items"
-          :color="stringToColour(item.name)"
-          :key="item.comment"
-        >
-          <Flex gap="2rem" align="center" margin="0 0 1rem">
-            <Text typeStyle="bodyBold">{{ item.name }}</Text>
-            <Text typeStyle="note">{{ item.time }}</Text>
-          </Flex>
-          <Text color="darkgrey">{{ item.comment }}</Text>
-        </CommentItem>
+      <CommentsList v-if="items.length">
+        <transition-group>
+          <CommentItem
+            v-for="item in items"
+            :color="stringToColour(item.authorUser.fullname)"
+            :key="item.content"
+            :isAuthor="user.id === item.authorUser.id"
+          >
+            <Flex gap="2rem" align="center" margin="0 0 1rem">
+              <Text typeStyle="bodyBold">{{ item.authorUser.fullname }}</Text>
+
+              <!-- <Text typeStyle="note">{{ item.created_at }}</Text> -->
+              <DeleteButton
+                @click="deleteConfirm = item.id"
+                v-if="user.id === item.authorUser.id"
+                ><Text typeStyle="note">Delete</Text></DeleteButton
+              >
+            </Flex>
+            <Text color="darkgrey">{{ item.content }}</Text>
+            <ConfirmDialog
+              v-show="deleteConfirm === item.id"
+              direction="column"
+              align="center"
+            >
+              <Text typeStyle="bodyBold" color="crimson"
+                >Delete this comment?</Text
+              >
+              <Flex gap="3rem">
+                <SecondaryButton
+                  @click="deleteComment(item.id, getPageComments)"
+                  color="grey"
+                  >Yes</SecondaryButton
+                >
+                <SecondaryButton @click="deleteConfirm = null"
+                  >No</SecondaryButton
+                >
+              </Flex>
+            </ConfirmDialog>
+          </CommentItem>
+        </transition-group>
       </CommentsList>
+      <EmptyList v-else>
+        <Loader v-if="isFetching" />
+        <Text v-else typeStyle="bodyBold"
+          >No comments for Page {{ page }}.<br />Be there first to leave a
+          comment!</Text
+        >
+      </EmptyList>
     </CommentsWrapper>
-    <InputWrapper gap="1.5rem" align="center">
-      <StyledIcon class="mirror" />
-      <StyledTextarea placeholder="comment..." />
-      <SecondaryButton>Submit</SecondaryButton>
-    </InputWrapper>
+    <form @submit="onSubmit">
+      <InputWrapper align="center">
+        <StyledIcon class="mirror" />
+        <StyledTextarea
+          v-model="comment.value"
+          :ref="comment.ref"
+          placeholder="comment..."
+        />
+        <SecondaryButton :disabled="isFetching" type="submit"
+          >Submit</SecondaryButton
+        >
+      </InputWrapper>
+    </form>
+
+    <StyledNotification :message="message" :setMessage="setMessage" />
   </Wrapper>
 </template>
 

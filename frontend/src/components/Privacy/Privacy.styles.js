@@ -3,6 +3,7 @@ import { typestyles } from "../../styles/typestyles";
 
 export const Wrapper = styled.div`
   ${typestyles.body};
+  max-width: 102.4rem;
 
   h1 {
     ${typestyles.h2};

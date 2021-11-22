@@ -75,7 +75,14 @@
           </ControlButton>
         </ControlSet>
 
-        <DownloadButton>
+        <DownloadButton
+          as="a"
+          :href="bookLink"
+          download="Simpsonbay-Heritage-E-book.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          color="crimson"
+        >
           <span>Download E-book</span>
           <DownloadIcon class="icon-16" />
         </DownloadButton>
@@ -87,9 +94,9 @@
 
     <transition name="slide-up">
       <Comments
-        :items="comments"
         :onClose="hideComments"
         :page="pageNumber"
+        :user="user"
         v-show="showComments"
       />
     </transition>

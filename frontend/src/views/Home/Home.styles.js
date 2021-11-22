@@ -165,7 +165,6 @@ export const ControlButton = styled.button`
 `;
 
 export const DownloadButton = styled(PrimaryButton)`
-  background-color: ${({ theme }) => theme.colors.crimson};
   margin-left: auto;
   width: auto;
   position: absolute;

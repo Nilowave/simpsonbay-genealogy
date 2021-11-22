@@ -1,5 +1,7 @@
 import styled, { keyframes } from "vue3-styled-components";
 
+const size = "1.5rem";
+
 const load7 = keyframes`
   0%,
   80%,
@@ -14,7 +16,7 @@ const load7 = keyframes`
 export const Loader = styled.div`
   color: ${({ theme }) => theme.colors.green};
   font-size: 10px;
-  margin: 80px auto;
+  margin: 0px auto;
   position: relative;
   text-indent: -9999em;
   -webkit-transform: translateZ(0);
@@ -22,13 +24,14 @@ export const Loader = styled.div`
   transform: translateZ(0);
   -webkit-animation-delay: -0.16s;
   animation-delay: -0.16s;
+  top: -2.5rem;
 
   &:before,
   &:after,
   & {
     border-radius: 50%;
-    width: 2.5em;
-    height: 2.5em;
+    width: ${size};
+    height: ${size};
     -webkit-animation-fill-mode: both;
     animation-fill-mode: both;
     -webkit-animation: ${load7} 1.8s infinite ease-in-out;
@@ -43,12 +46,12 @@ export const Loader = styled.div`
   }
 
   &:before {
-    left: -3.5em;
+    left: ${`calc((${size} + 1rem) * -1)`};
     -webkit-animation-delay: -0.32s;
     animation-delay: -0.32s;
   }
 
   &:after {
-    left: 3.5em;
+    left: ${`calc(${size} + 1rem)`};
   }
 `;

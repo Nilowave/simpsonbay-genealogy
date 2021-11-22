@@ -13,31 +13,6 @@ import axios from "axios";
 import router from "../../router";
 import store from "../../store/index";
 
-const comments = [
-  {
-    name: "Danilo Meulens",
-    comment: "Looks great!",
-    time: "now",
-  },
-  {
-    name: "Ashley Vincent",
-    comment: "Wow fancy!",
-    time: "1 day ago",
-  },
-  {
-    name: "Nirmala Meulens",
-    comment:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
-    time: "1 day ago",
-  },
-  {
-    name: "Bryan Meulens",
-    comment:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
-    time: "1 day ago",
-  },
-];
-
 export default {
   name: "home",
   props: {
@@ -58,13 +33,13 @@ export default {
   },
   data() {
     return {
-      comments,
       pages: [],
       pagesHiRes: [],
       hasMouse: true,
       showComments: false,
-      pageNumber: null,
+      pageNumber: 1,
       user: store.state.isLoggedIn,
+      bookLink: null,
     };
   },
   methods: {
@@ -159,6 +134,18 @@ export default {
           console.log("user update error", err.response);
         });
     }
+
+    // get book pdf
+    axios
+      .get(`${process.env.VUE_APP_API_DOMAIN}/e-book`, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        this.bookLink = res.data.file.url;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
     const TOTAL_PAGES = 77;
     const lowResPages = [...new Array(TOTAL_PAGES).keys()].map(

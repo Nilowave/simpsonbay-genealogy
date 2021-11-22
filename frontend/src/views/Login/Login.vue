@@ -6,7 +6,7 @@
     <Container>
       <StyledPicture>
         <IntroVideo
-          src="https://simpsonbay-heritage.s3.amazonaws.com/bridge_43f39692c0.mp4"
+          :src="introVideo"
           muted
           autoplay
           playsinline
@@ -22,7 +22,7 @@
         <transition appear mode="out-in">
           <component :is="view" v-bind="currentProperties" />
         </transition>
-        <Notification :message="message" />
+        <Notification :message="message" :setMessage="setMessage" />
       </FlexWrapper>
     </Container>
 

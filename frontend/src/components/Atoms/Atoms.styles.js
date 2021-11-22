@@ -1,9 +1,10 @@
 import styled, { css } from "vue3-styled-components";
 import { typestyles } from "../../styles/typestyles";
+import { lightenDarkenColor } from "../../utils/lightenDarkenColor";
 
-export const PrimaryButton = styled.button`
+export const PrimaryButton = styled("button", { color: String })`
   ${typestyles.button};
-  background-color: ${({ theme }) => theme.colors.green};
+  background-color: ${({ theme, color }) => theme.colors[color || "green"]};
   border-radius: 0.5rem;
   color: ${({ theme }) => theme.colors.white};
   padding: 1.2rem;
@@ -16,18 +17,25 @@ export const PrimaryButton = styled.button`
 
   @media (hover: hover) {
     &:hover {
-      background-color: ${({ theme }) => theme.colors.darkgreen};
+      background-color: ${({ theme, color }) =>
+        lightenDarkenColor(theme.colors[color || "green"], 30)};
     }
   }
 
   @media (min-width: 768px) {
     padding: 1.4rem;
   }
+
+  &:disabled {
+    background-color: ${({ theme }) => theme.colors.lightgrey};
+    color: ${({ theme }) => theme.colors.grey};
+    pointer-events: none;
+  }
 `;
 
-export const SecondaryButton = styled.button`
+export const SecondaryButton = styled("button", { color: String })`
   ${typestyles.button};
-  color: ${({ theme }) => theme.colors.green};
+  color: ${({ theme, color }) => theme.colors[color || "green"]};
   text-decoration: underline;
   padding: 1.4rem;
   display: flex;
@@ -37,6 +45,11 @@ export const SecondaryButton = styled.button`
 
   &:hover {
     color: ${({ theme }) => theme.colors.darkgreen};
+  }
+
+  &:disabled {
+    color: ${({ theme }) => theme.colors.lightgrey};
+    pointer-events: none;
   }
 `;
 
