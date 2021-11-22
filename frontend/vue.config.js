@@ -1,5 +1,8 @@
 module.exports = {
   publicPath: "",
+  devServer: {
+    proxy: "http://localhost:1337",
+  },
   css: {
     extract: false,
   },

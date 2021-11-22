@@ -77,6 +77,7 @@ export const Flex = styled("div", flexProps)`
   display: flex;
   position: relative;
   flex: 1;
+  min-height: 0;
 
   ${(props) => css`
     gap: ${props.gap || "0"};

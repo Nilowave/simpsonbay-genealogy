@@ -1,58 +1,97 @@
 import styled, { css, keyframes } from "vue3-styled-components";
 import { typestyles } from "../../styles/typestyles";
-import { PrimaryButton, Flex } from "../../components/Atoms/Atoms.styles";
+import { PrimaryButton, Flex, Text } from "../../components/Atoms/Atoms.styles";
 import { fadeIn } from "../../styles/transitions";
 
 export const PageWrapper = styled.main`
   height: 100%;
   position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+
+  @media (min-width: 768px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
 `;
 
 export const Background = styled.div`
-  background: url("/images/login-bg.jpg") no-repeat;
-  background-size: cover;
-  position: absolute;
   width: 100%;
-  height: 100%;
+  height: 33%;
   top: 0;
   left: 0;
   mix-blend-mode: luminosity;
   opacity: 0.25;
+  background: url("/images/login-bg.jpg") no-repeat;
+  position: absolute;
+  background-size: cover;
+  background-position: center;
+
+  @media (min-width: 768px) {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 export const GreenOverlay = styled.div`
   background-color: ${({ theme }) => theme.colors.green};
-  width: 50%;
-  height: 100%;
-  position: absolute;
+  width: 100%;
+  height: 33vh;
   mix-blend-mode: multiply;
   top: 0;
   left: 0;
+  position: relative;
+
+  @media (min-width: 768px) {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+  }
 `;
 
 export const Container = styled.div`
   position: relative;
   display: flex;
-  max-width: 160rem;
-  max-height: 90rem;
-  width: 90%;
-  height: 90%;
   background-color: ${({ theme }) => theme.colors.offwhite};
-  border-radius: 1.5rem;
+  width: 100%;
+  flex-direction: column;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    border-radius: 1.5rem;
+    width: 90%;
+    height: 90%;
+    max-width: 160rem;
+    max-height: 90rem;
+  }
 `;
 
 export const StyledPicture = styled.div`
-  width: 50%;
-  height: 100%;
-  background-color: ${({ theme }) => theme.colors.green};
-  background: url("/images/bridge.jpg") center;
-  background-size: cover;
-  border-radius: 1.5rem 0 0 1.5rem;
+  width: 83%;
+  padding-bottom: 48.9%;
+  background: url("/images/logo-icon.svg") center no-repeat;
+  background-size: 20%;
+  border-radius: 0 1.5rem 1.5rem 0;
   overflow: hidden;
   position: relative;
+  isolation: isolate;
+  margin-top: -25%;
+
+  @media (min-width: 768px) {
+    background: url("/images/logo-sbg.svg") center no-repeat;
+    background-size: 20%;
+    border-radius: 1.5rem 0 0 1.5rem;
+    padding: 0;
+    width: 50%;
+    height: 100%;
+    margin: 0;
+  }
+
+  &:hover {
+    p {
+      opacity: 1;
+    }
+  }
 `;
 
 export const IntroVideo = styled("video", { isReady: Boolean })`
@@ -63,21 +102,22 @@ export const IntroVideo = styled("video", { isReady: Boolean })`
   transform: translateX(-50%);
   opacity: 0;
 
-  ${(props) =>
-    props.isReady &&
-    `animation: ${fadeIn} 2s ease forwards;`}/* animation: ${fadeIn} 2s ease forwards; */
+  ${(props) => props.isReady && `animation: ${fadeIn} 2s ease forwards;`};
 `;
 
 export const IntroWrapper = styled.div`
   ${typestyles.bodyMedium};
   width: 100%;
-  max-height: 88%;
-  max-width: 56rem;
   color: ${({ theme }) => theme.colors.crimson};
   white-space: break-spaces;
   text-align: justify;
   position: relative;
   overflow-y: auto;
+
+  @media (min-width: 768px) {
+    max-height: 88%;
+    max-width: 56rem;
+  }
 `;
 
 export const Wrapper = styled(Flex)`
@@ -85,17 +125,35 @@ export const Wrapper = styled(Flex)`
   text-align: center;
   flex: 1;
   position: relative;
+  gap: 4rem;
+  padding-bottom: 7rem;
+  margin-top: 4rem;
+
+  @media (min-width: 590px) {
+    margin-top: 0;
+  }
+  @media (min-width: 768px) {
+    padding-bottom: 0;
+    gap: 1rem;
+  }
+`;
+
+export const IntroFlex = styled(Flex)`
+  gap: 4rem;
+  @media (min-width: 768px) {
+    gap: 0;
+  }
 `;
 
 export const FlexWrapper = styled.div`
-  width: 50%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  padding: 3%;
+  padding: 2rem;
 
   @media (min-width: 768px) {
+    width: 50%;
     padding: 5%;
   }
 
@@ -104,9 +162,34 @@ export const FlexWrapper = styled.div`
   }
 `;
 
-export const Logo = styled.img`
+export const LogoMobile = styled.div`
+  max-width: 20rem;
+  width: 50%;
+  display: block;
+  margin: 0 auto;
+  color: white;
+  position: relative;
+  top: 30%;
+  transform: translateY(-50%);
+
+  @media (min-width: 590px) {
+    display: none;
+  }
+`;
+
+export const Logo = styled.div`
+  color: ${({ theme }) => theme.colors.green};
+  margin: 5% 0 5%;
+  display: none;
   max-width: 29rem;
-  margin: 2.5% 0 9%;
+  width: 50%;
+
+  @media (min-width: 590px) {
+    display: block;
+  }
+  @media (min-width: 768px) {
+    margin: 2.5% 0 9%;
+  }
 `;
 
 export const Heading = styled.h2`
@@ -181,19 +264,54 @@ export const ContinueButton = styled(PrimaryButton)`
 export const FeatherWrapper = styled.div`
   position: absolute;
   z-index: 0;
-  top: -6%;
-  left: -4%;
+  top: -3rem;
+  left: -5%;
   opacity: 0.25;
   width: 20%;
   max-width: 9rem;
+
+  @media (min-width: 590px) {
+    left: -4%;
+    top: -6%;
+  }
 `;
 
 export const PolicyBarWrapper = styled.div`
-  position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  max-width: 160rem;
-  width: 90%;
   margin: auto;
+  background-color: ${({ theme }) => theme.colors.offwhite};
+  border-top: dashed 1px
+    ${({ theme }) => theme.utils.hexToRgba(theme.colors.green, 0.5)};
+
+  @media (min-width: 768px) {
+    max-width: 160rem;
+    width: 90%;
+    position: absolute;
+    background-color: transparent;
+    border: none;
+  }
+`;
+
+export const VideoCredit = styled(Text)`
+  position: absolute;
+  color: ${({ theme }) => theme.colors.offwhite};
+  left: 1rem;
+  bottom: 1rem;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+
+  @media (min-width: 768px) {
+    left: 2rem;
+    bottom: 2rem;
+  }
+
+  a {
+    display: inline-block;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 `;

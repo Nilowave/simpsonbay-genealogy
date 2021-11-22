@@ -26,12 +26,16 @@ export const ContentWrapper = styled.div`
   justify-content: flex-start;
   position: relative;
   z-index: 1;
-  padding: 3rem 2rem;
+  padding: 1.5rem;
   background-color: ${({ theme }) => theme.colors.white};
   border-radius: 10px;
   max-width: 124rem;
   margin: 0 2rem;
   box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.6);
+
+  @media (min-width: 768px) {
+    padding: 3rem 2rem;
+  }
 `;
 
 export const CloseButton = styled.button`
@@ -43,5 +47,9 @@ export const Content = styled.div`
   max-height: calc(90vh - 4rem);
   overflow: hidden;
   overflow-y: auto;
-  padding: 2rem;
+  padding: 1rem;
+
+  @media (min-width: 768px) {
+    padding: 2rem;
+  }
 `;

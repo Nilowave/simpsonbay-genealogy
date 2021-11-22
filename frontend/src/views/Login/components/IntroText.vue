@@ -1,13 +1,13 @@
 <template>
   <Wrapper direction="column" justify="space-between" align="center">
-    <Flex direction="column" justify="space-between" align="center">
+    <IntroFlex direction="column" justify="space-between" align="center">
       <FeatherWrapper><FeatherIcon /></FeatherWrapper>
       <IntroWrapper v-html="text" />
       <ContinueButton @click="onShowSignIn">
         {{ cta }}
         <Arrow class="arrow" />
       </ContinueButton>
-    </Flex>
+    </IntroFlex>
   </Wrapper>
 </template>
 

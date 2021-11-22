@@ -83,9 +83,11 @@ export default {
         })
         .catch((err) => {
           if (err.response.status === 400) {
-            props.setMessage("Incorrect email or password");
+            props.setMessage("Incorrect email or password. Please try again.");
           } else {
-            props.setMessage("There was an error. Please try again.");
+            props.setMessage(
+              "There was an error. Please try again or contact info@simpsonbay-heritage.com."
+            );
           }
         });
     };

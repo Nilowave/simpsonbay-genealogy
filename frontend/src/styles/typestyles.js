@@ -6,6 +6,7 @@ export const typestyles = {
     line-height: 1.2;
     font-family: ${({ theme }) => theme.fonts.baskerville};
     font-weight: 700;
+    font-style: italic;
   `,
   h3: css`
     font-size: 2.4rem;

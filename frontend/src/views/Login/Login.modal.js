@@ -7,6 +7,7 @@ import ForgotPasswordForm from "./components/ForgotPasswordForm";
 import ResetPasswordForm from "./components/ResetPasswordForm";
 import Notification from "../../components/Notification/Notification.vue";
 import PolicyBar from "../../components/PolicyBar/PolicyBar";
+import LogoIcon from "../../assets/logo-stacked.svg";
 import { Flex } from "../../components/Atoms/Atoms.styles";
 import { Loader } from "../../components/Loader/Loader.styles";
 import * as S from "./Login.styles";
@@ -14,6 +15,7 @@ import * as S from "./Login.styles";
 export default {
   components: {
     ...S,
+    LogoIcon,
     Notification,
     PolicyBar,
     IntroText,
