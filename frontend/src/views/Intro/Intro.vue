@@ -6,9 +6,9 @@
     <Container>
       <StyledPicture />
       <FlexWrapper>
-        <Logo src="/images/logo-stacked.svg" alt="Simpsonbay Genealogy" />
+        <Logo src="/images/logo-stacked.svg" alt="Simpsonbay Heritage" />
         <Wrapper>
-          <p>lalala</p>
+          <p>intro</p>
         </Wrapper>
         <Notification :message="message" />
       </FlexWrapper>

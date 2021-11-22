@@ -18,7 +18,7 @@
       </StyledPicture>
       <Loader v-if="loading" />
       <FlexWrapper v-else>
-        <Logo src="/images/logo-stacked.svg" alt="Simpsonbay Genealogy" />
+        <Logo src="/images/logo-stacked.svg" alt="Simpsonbay Heritage" />
         <transition appear mode="out-in">
           <component :is="view" v-bind="currentProperties" />
         </transition>
