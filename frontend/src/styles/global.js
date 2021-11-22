@@ -116,4 +116,5 @@ injectGlobal`
   *::-webkit-scrollbar-track {
     background: transparent;
   }
+  *::-webkit-scrollbar-corner { background: transparent; }
 `;
