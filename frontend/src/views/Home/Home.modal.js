@@ -40,9 +40,26 @@ export default {
       pageNumber: 1,
       user: store.state.isLoggedIn,
       bookLink: null,
+      singlePage: false,
     };
   },
+  created() {
+    window.addEventListener("resize", this.onWindowResize);
+  },
+  destroyed() {
+    window.removeEventListener("resize", this.onWindowResize);
+  },
   methods: {
+    onWindowResize() {
+      console.log(
+        "resize",
+        window.innerHeight,
+        window.innerHeight > window.innerWidth
+      );
+      if (window.innerHeight < 480 && window.innerHeight > window.innerWidth) {
+        console.log("set single page");
+      }
+    },
     hideComments() {
       this.showComments = false;
     },
@@ -66,7 +83,7 @@ export default {
     onFlipEnd(page) {
       if (store.state.isLoggedIn) {
         const user = store.state.isLoggedIn;
-        console.log("FLIPT", page, store.state.readPages);
+
         if (page > store.state.readPages) {
           store.commit("setReadPages", page);
           axios
@@ -86,28 +103,18 @@ export default {
         }
       }
     },
-    onFlipLeftStart(page) {
-      console.log("flip-left-start", page);
-    },
+    onFlipLeftStart(page) {},
     onFlipLeftEnd(page) {
-      console.log("flip-left-end", page);
       window.location.hash = "#" + page;
       this.onFlipEnd(page);
     },
-    onFlipRightStart(page) {
-      console.log("flip-right-start", page);
-    },
+    onFlipRightStart(page) {},
     onFlipRightEnd(page) {
-      console.log("flip-right-end", page);
       window.location.hash = "#" + page;
       this.onFlipEnd(page);
     },
-    onZoomStart(zoom) {
-      console.log("zoom-start", zoom);
-    },
-    onZoomEnd(zoom) {
-      console.log("zoom-end", zoom);
-    },
+    onZoomStart(zoom) {},
+    onZoomEnd(zoom) {},
     setPageFromHash() {
       const n = parseInt(window.location.hash.slice(1), 10);
       if (isFinite(n)) {

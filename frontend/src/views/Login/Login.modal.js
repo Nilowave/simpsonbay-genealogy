@@ -1,4 +1,5 @@
 import axios from "axios";
+import router from "../../router";
 import { useMessage } from "../../hooks/useMessage";
 import IntroText from "./components/IntroText";
 import LoginForm from "./components/LoginForm";
@@ -45,6 +46,9 @@ export default {
     showRegister() {
       this.view = "RegisterForm";
     },
+    showIntro() {
+      this.view = "IntroText";
+    },
   },
 
   computed: {
@@ -52,19 +56,21 @@ export default {
       switch (this.view) {
         case "IntroText":
           return {
+            onRedirect: () => router.push("/"),
             onShowSignIn:
               this.page === "Register" ? this.showRegister : this.showSignIn,
             text: this.introText,
-            cta:
-              this.page === "Register"
-                ? "Continue to Register"
-                : "Continue to Sign in",
+            cta: "Read the E-book",
+            // this.page === "Register"
+            //   ? "Continue to Register"
+            //   : "Continue to Sign in",
           };
 
         case "LoginForm":
           return {
             setMessage: this.setMessage,
             showForgot: this.showForgot,
+            onSubmitRedirect: this.showIntro,
           };
 
         case "ForgotPasswordForm":
@@ -93,13 +99,17 @@ export default {
       videoready: false,
       introText: "",
       introVideo: null,
-      view: "IntroText",
+      view: "LoginForm",
     };
   },
 
   mounted() {
     if (this.page === "ResetPassword") {
       this.view = "ResetPasswordForm";
+    } else if (this.page === "Login") {
+      this.view = "LoginForm";
+    } else {
+      this.view = "RegisterForm";
     }
 
     axios

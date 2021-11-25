@@ -3,7 +3,7 @@
     <IntroFlex direction="column" justify="space-between" align="center">
       <FeatherWrapper><FeatherIcon /></FeatherWrapper>
       <IntroWrapper v-html="text" />
-      <ContinueButton @click="onShowSignIn">
+      <ContinueButton @click="onRedirect">
         {{ cta }}
         <Arrow class="arrow" />
       </ContinueButton>
@@ -30,6 +30,7 @@ export default {
       type: Function,
       required: true,
     },
+    onRedirect: Function,
     text: String,
     cta: String,
   },

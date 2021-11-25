@@ -6,6 +6,12 @@ import {
   Flex,
 } from "../../components/Atoms/Atoms.styles";
 import { fadeIn } from "../../styles/transitions";
+import { respondTo } from "../../styles/helpers/respondTo";
+import {
+  MediaQuery,
+  MediaQueryHeight,
+  Orientation,
+} from "../../styles/mediaQuery";
 
 export const Home = styled.main`
   -webkit-font-smoothing: antialiased;
@@ -27,7 +33,6 @@ export const Background = styled.div`
   height: 100%;
   top: 0;
   left: 0;
-  /* opacity: 0.75; */
   mix-blend-mode: multiply;
 
   &:before {
@@ -52,6 +57,10 @@ export const Logo = styled.div`
   svg {
     width: 100%;
   }
+
+  @media ${respondTo(MediaQueryHeight.MAX_767, Orientation.landscape)} {
+    max-width: 10rem;
+  }
 `;
 
 export const UsernameWrapper = styled.div`
@@ -61,6 +70,10 @@ export const UsernameWrapper = styled.div`
   right: 0;
   margin: 1.5rem ${({ theme }) => theme.sitePaddings.mobile};
   z-index: 10;
+
+  @media ${respondTo(MediaQueryHeight.MAX_767, Orientation.landscape)} {
+    display: none;
+  }
 `;
 
 export const Username = styled.p`
@@ -88,6 +101,12 @@ export const StyledFlipbook = styled(Flipbook)`
   position: relative;
 
   animation: ${fadeIn} 2s ease forwards;
+
+  @media ${respondTo(MediaQueryHeight.MAX_479, Orientation.landscape)} {
+    flex-direction: row;
+    gap: 2rem;
+    /* flex-wrap: wrap; */
+  }
 `;
 
 export const ActionBar = styled.div`
@@ -100,8 +119,18 @@ export const ActionBar = styled.div`
   border-radius: 1rem 1rem 0 0;
   gap: 2rem;
 
-  @media (min-width: 768px) {
+  @media ${respondTo(MediaQuery.MIN_768)} {
     justify-content: center;
+  }
+
+  @media ${respondTo(MediaQueryHeight.MAX_479, Orientation.landscape)} {
+    flex-direction: column;
+    width: auto;
+    height: 100%;
+    border-radius: 0;
+    padding: 0.5rem;
+    position: relative;
+    z-index: 1;
   }
 `;
 
@@ -111,13 +140,17 @@ export const ControlSet = styled(Flex)`
   &:first-of-type {
     flex-direction: column-reverse;
 
-    @media (min-width: 768px) {
+    @media ${respondTo(MediaQuery.MIN_768)} {
       flex-direction: row;
     }
   }
 
-  @media (min-width: 768px) {
+  @media ${respondTo(MediaQuery.MIN_768)} {
     flex-direction: row;
+  }
+
+  @media ${respondTo(MediaQueryHeight.MAX_479, Orientation.landscape)} {
+    flex-direction: column !important;
   }
 `;
 
@@ -157,7 +190,13 @@ export const ControlButton = styled.button`
     opacity: 0.5;
   }
 
-  @media (max-width: 480px) {
+  @media ${respondTo(MediaQueryHeight.MAX_767, Orientation.landscape)} {
+    span {
+      display: none;
+    }
+  }
+
+  @media ${respondTo(MediaQuery.MAX_479)} {
     span {
       display: none;
     }
@@ -171,12 +210,16 @@ export const DownloadButton = styled(PrimaryButton)`
   right: ${({ theme }) => theme.sitePaddings.mobile};
   bottom: 21.3rem;
 
-  @media (min-width: 768px) {
+  @media ${respondTo(MediaQuery.MIN_768)} {
     bottom: 13.7rem;
   }
 
-  @media (min-width: 1230px) {
+  @media only screen and (min-width: 1230px) {
     position: static;
+  }
+
+  @media ${respondTo(MediaQueryHeight.MAX_767, Orientation.landscape)} {
+    display: none;
   }
 `;
 
@@ -187,18 +230,22 @@ export const CommentsButton = styled(PrimaryButton)`
   right: ${({ theme }) => theme.sitePaddings.mobile};
   bottom: 27.3rem;
 
-  @media (min-width: 520px) {
+  @media only screen and (min-width: 520px) {
     bottom: 21.3rem;
     left: ${({ theme }) => theme.sitePaddings.mobile};
     right: auto;
   }
 
-  @media (min-width: 768px) {
+  @media ${respondTo(MediaQuery.MIN_768)} {
     bottom: 13.7rem;
   }
 
-  @media (min-width: 1230px) {
+  @media only screen and (min-width: 1230px) {
     position: static;
+  }
+
+  @media ${respondTo(MediaQueryHeight.MAX_767, Orientation.landscape)} {
+    display: none;
   }
 `;
 
@@ -206,4 +253,12 @@ export const PolicyBarWrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
   width: 100%;
   border-top: dashed 1px ${({ theme }) => theme.colors.lightgrey};
+
+  @media ${respondTo(MediaQueryHeight.MAX_767, Orientation.landscape)} {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: none;
+    border: none;
+  }
 `;

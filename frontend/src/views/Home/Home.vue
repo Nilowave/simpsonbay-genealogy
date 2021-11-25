@@ -18,6 +18,7 @@
     <StyledFlipbook
       class="flipbook"
       :pages="pages"
+      :singlePage="singlePage"
       :pagesHiRes="pagesHiRes"
       :startPage="pageNumber"
       v-slot="flipbook"

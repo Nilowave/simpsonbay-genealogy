@@ -47,6 +47,9 @@ export default {
     showForgot: {
       type: Function,
     },
+    onSubmitRedirect: {
+      type: Function,
+    },
   },
 
   setup(props) {
@@ -79,7 +82,11 @@ export default {
         )
         .then((res) => {
           console.log("login success, push /", res.data);
-          router.push("/");
+          if (props.onSubmitRedirect) {
+            props.onSubmitRedirect();
+          } else {
+            router.push("/");
+          }
         })
         .catch((err) => {
           if (err.response.status === 400) {
