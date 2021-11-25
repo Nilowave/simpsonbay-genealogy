@@ -32,6 +32,9 @@ export default {
     ...S,
   },
   data() {
+    if (window.innerHeight < 480 && window.innerHeight < window.innerWidth) {
+      console.log("single pager");
+    }
     return {
       pages: [],
       pagesHiRes: [],
@@ -40,7 +43,7 @@ export default {
       pageNumber: 1,
       user: store.state.isLoggedIn,
       bookLink: null,
-      singlePage: false,
+      singlePage: this.isSinglePager(),
     };
   },
   created() {
@@ -50,15 +53,11 @@ export default {
     window.removeEventListener("resize", this.onWindowResize);
   },
   methods: {
+    isSinglePager() {
+      return window.innerHeight < 480 && window.innerHeight < window.innerWidth;
+    },
     onWindowResize() {
-      console.log(
-        "resize",
-        window.innerHeight,
-        window.innerHeight > window.innerWidth
-      );
-      if (window.innerHeight < 480 && window.innerHeight > window.innerWidth) {
-        console.log("set single page");
-      }
+      this.singlePage = this.isSinglePager();
     },
     hideComments() {
       this.showComments = false;
@@ -123,6 +122,7 @@ export default {
     },
   },
   mounted() {
+    console.log("mounted");
     // update user last read
     if (store.state.isLoggedIn) {
       const user = store.state.isLoggedIn;

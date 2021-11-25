@@ -61,6 +61,14 @@ export const Logo = styled.div`
   @media ${respondTo(MediaQueryHeight.MAX_767, Orientation.landscape)} {
     max-width: 10rem;
   }
+
+  @media ${respondTo(MediaQueryHeight.MAX_479, Orientation.landscape)} {
+    path {
+      &:last-of-type {
+        display: none;
+      }
+    }
+  }
 `;
 
 export const UsernameWrapper = styled.div`
@@ -104,7 +112,7 @@ export const StyledFlipbook = styled(Flipbook)`
 
   @media ${respondTo(MediaQueryHeight.MAX_479, Orientation.landscape)} {
     flex-direction: row;
-    gap: 2rem;
+    gap: 0rem;
     /* flex-wrap: wrap; */
   }
 `;
@@ -255,10 +263,6 @@ export const PolicyBarWrapper = styled.div`
   border-top: dashed 1px ${({ theme }) => theme.colors.lightgrey};
 
   @media ${respondTo(MediaQueryHeight.MAX_767, Orientation.landscape)} {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    background: none;
-    border: none;
+    display: none;
   }
 `;
