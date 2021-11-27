@@ -115,6 +115,7 @@ export default {
     axios
       .get(`${process.env.VUE_APP_API_DOMAIN}/intro-text`)
       .then((res) => {
+        console.log("got intro", res.data);
         this.introText = res.data.text.replace(
           res.data.text.substring(0, 1),
           `<span class="large">${res.data.text.substring(0, 1)}</span>`
