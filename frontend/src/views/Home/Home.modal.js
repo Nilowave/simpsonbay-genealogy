@@ -142,6 +142,15 @@ export default {
         });
     }
 
+    // get book pages
+    axios
+      .get(`${process.env.VUE_APP_API_DOMAIN}/e-book/pages`, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        console.log("pages");
+        console.log(res);
+      });
     // get book pdf
     axios
       .get(`${process.env.VUE_APP_API_DOMAIN}/e-book`, {
