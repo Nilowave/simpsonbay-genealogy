@@ -21,6 +21,7 @@
       :singlePage="singlePage"
       :pagesHiRes="pagesHiRes"
       :startPage="pageNumber"
+      :zooms="[1, 2]"
       v-slot="flipbook"
       ref="flipbook"
       @flip-left-start="onFlipLeftStart"

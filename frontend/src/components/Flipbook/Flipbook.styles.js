@@ -29,6 +29,7 @@ export const FlipbookContainer = styled.div`
   height: 100%;
   transform-origin: top left;
   user-select: none;
+  z-index: 10;
 `;
 
 export const ClickToFlip = styled("button", { direction: String })`

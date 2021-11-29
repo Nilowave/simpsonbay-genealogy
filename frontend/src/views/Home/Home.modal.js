@@ -121,8 +121,7 @@ export default {
       }
     },
   },
-  mounted() {
-    console.log("mounted");
+  async mounted() {
     // update user last read
     if (store.state.isLoggedIn) {
       const user = store.state.isLoggedIn;
@@ -142,15 +141,6 @@ export default {
         });
     }
 
-    // get book pages
-    axios
-      .get(`${process.env.VUE_APP_API_DOMAIN}/e-book/pages`, {
-        withCredentials: true,
-      })
-      .then((res) => {
-        console.log("pages");
-        console.log(res);
-      });
     // get book pdf
     axios
       .get(`${process.env.VUE_APP_API_DOMAIN}/e-book`, {
@@ -163,13 +153,16 @@ export default {
         console.log(err);
       });
 
-    const TOTAL_PAGES = 77;
-    const lowResPages = [...new Array(TOTAL_PAGES).keys()].map(
-      (index) => "pdf/low_res/page_" + (index + 1) + ".jpg"
+    // get book pages
+    const pageResponse = await axios.get(
+      `${process.env.VUE_APP_API_DOMAIN}/e-book/pages`,
+      {
+        withCredentials: true,
+      }
     );
-    const highResPages = [...new Array(TOTAL_PAGES).keys()].map(
-      (index) => "pdf/high_res/page_" + (index + 1) + ".jpg"
-    );
+
+    this.pages = pageResponse.data.pages;
+    this.pagesHiRes = pageResponse.data.pages;
 
     window.addEventListener("keydown", (ev) => {
       const flipbook = this.$refs.flipbook;
@@ -183,12 +176,6 @@ export default {
         return flipbook.flipRight();
       }
     });
-
-    // Simulate asynchronous pages initialization
-    setTimeout(() => {
-      this.pages = [null, ...lowResPages];
-      this.pagesHiRes = [null, ...highResPages];
-    }, 1);
 
     window.addEventListener("hashchange", this.setPageFromHash);
     this.setPageFromHash();

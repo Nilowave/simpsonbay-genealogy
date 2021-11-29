@@ -9,7 +9,7 @@ injectGlobal`
 	${transitions};
 
   :root {
-    --shadow-color: 286deg 36% 56%;
+    --shadow-color: 166deg 60% 22.5%;
     --shadow-elevation-low:
       0.3px 0.5px 0.7px hsl(var(--shadow-color) / 0.34),
       0.4px 0.8px 1px -1.2px hsl(var(--shadow-color) / 0.34),

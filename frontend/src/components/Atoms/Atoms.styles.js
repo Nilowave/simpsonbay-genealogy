@@ -13,15 +13,16 @@ export const PrimaryButton = styled("button", { color: String })`
   align-items: center;
   gap: 1rem;
   width: 100%;
-  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
-  --shadow-color: ${({ theme, color }) =>
-    theme.utils.hexToHSL(theme.colors[color || "green"])};
+  transition: all 0.7s cubic-bezier(0.16, 1.52, 0.3, 1);
 
   @media (hover: hover) {
     &:hover {
-      box-shadow: var(--shadow-elevation-medium);
-      background-color: ${({ theme }) => theme.colors.white};
+      ${({ theme, color }) =>
+        theme.elevation.medium(theme.colors[color || "green"])};
+      background-color: ${({ theme, color }) =>
+        theme.utils.hexToRgba(theme.colors[color || "green"], 0.1)};
       color: ${({ theme, color }) => theme.colors[color || "green"]};
+      transform: translate(-3px, -3px);
     }
   }
 

@@ -175,18 +175,28 @@ export const ControlButton = styled.button`
   gap: 1rem;
   min-height: 5.6rem;
 
-  transition: color 0.2s ease-out, background-color 0.2s ease-out,
-    opacity 0.2s ease-out;
+  transition: all 0.7s cubic-bezier(0.16, 1.52, 0.3, 1);
 
   &:active {
     background-color: ${({ theme }) => theme.colors.green};
     color: ${({ theme }) => theme.colors.white};
   }
 
+  svg,
+  span {
+    transition: all 0.7s cubic-bezier(0.16, 1.52, 0.3, 1);
+  }
+
   @media (hover: hover) {
     &:hover {
       background-color: ${({ theme }) => theme.colors.green};
       color: ${({ theme }) => theme.colors.white};
+      box-shadow: inset 3px 3px 3px rgba(0, 0, 0, 0.5);
+
+      svg,
+      span {
+        transform: translate(3px, 3px);
+      }
     }
   }
 
