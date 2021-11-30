@@ -4,7 +4,7 @@ import CommentIcon from "../../assets/icons/comment.svg";
 import { typestyles } from "../../styles/typestyles";
 import Notification from "../Notification/Notification";
 
-export const Wrapper = styled.div`
+export const Wrapper = styled("div", { fullView: Boolean })`
   position: fixed;
   background-color: ${({ theme }) => theme.colors.white};
   border-radius: 10px 10px 0 0;
@@ -12,10 +12,12 @@ export const Wrapper = styled.div`
   z-index: 1;
   bottom: 0;
   left: 0;
-  max-height: 46rem;
+  max-height: ${({ fullView }) => (fullView ? "90vh" : "46rem")};
   display: flex;
   flex-direction: column;
   width: 100%;
+
+  /* transition: max-height 0.7s ease-in-out; */
 
   @media (min-width: 520px) {
     width: 30%;
@@ -27,6 +29,9 @@ export const Wrapper = styled.div`
 export const HeaderNav = styled(Flex)`
   padding: 1rem;
   border-bottom: solid 1px ${({ theme }) => theme.colors.lightgrey};
+  height: 6rem;
+  flex-grow: 0;
+  min-height: 6rem;
 `;
 
 export const NavButtons = styled(Flex)`
@@ -45,7 +50,7 @@ export const ArrowButton = styled.button`
   }
 `;
 
-export const HeaderTitle = styled.h4`
+export const HeaderTitle = styled(Flex)`
   ${typestyles.bodyBold};
   flex: 1;
   align-self: center;
@@ -70,7 +75,7 @@ export const CloseButton = styled.button`
 export const CommentsWrapper = styled(Flex)`
   padding: 1rem 0;
   overflow-y: auto;
-  max-height: 30vh;
+  /* max-height: 30vh; */
 
   &::after {
     content: "";
@@ -107,6 +112,9 @@ export const CommentItem = styled("li", { color: String, isAuthor: Boolean })`
   }
 
   transition: all 0.5s ease;
+
+  &:hover {
+  }
 `;
 
 export const StyledIcon = styled(CommentIcon)`
@@ -202,4 +210,8 @@ export const StyledNotification = styled(Notification)`
   left: 0;
   right: 0;
   max-width: 33rem;
+`;
+
+export const StyledForm = styled.form`
+  margin-top: auto;
 `;

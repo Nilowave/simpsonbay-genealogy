@@ -1,5 +1,5 @@
 <template>
-  <Wrapper>
+  <Wrapper :fullView="viewAll">
     <HeaderNav justify="space-between" gap="1.5rem">
       <NavButtons v-show="false" gap="0.8rem">
         <ArrowButton>
@@ -9,7 +9,17 @@
           <ChevronIcon class="mirror" />
         </ArrowButton>
       </NavButtons>
-      <HeaderTitle>Comments on Page {{ page }}</HeaderTitle>
+      <HeaderTitle align="center" gap="1rem">
+        <span>Comments {{ viewAll ? "" : `on Page ${page}` }}</span>
+        |
+        <button
+          @click="viewAll = !viewAll"
+          :disabled="isFetching"
+          type="button"
+        >
+          View {{ viewAll ? "less" : "all" }}
+        </button>
+      </HeaderTitle>
       <CloseButton @click="onClose"><CloseIcon /></CloseButton>
     </HeaderNav>
     <CommentsWrapper direction="column">
@@ -18,7 +28,7 @@
           <CommentItem
             v-for="item in items"
             :color="stringToColour(item.authorUser.fullname)"
-            :key="item.content"
+            :key="item.id"
             :isAuthor="user.id === item.authorUser.id"
           >
             <Flex gap="2rem" align="center" margin="0 0 1rem">
@@ -62,7 +72,7 @@
         >
       </EmptyList>
     </CommentsWrapper>
-    <form @submit="onSubmit">
+    <StyledForm @submit="onSubmit">
       <InputWrapper align="center">
         <StyledIcon class="mirror" />
         <StyledTextarea
@@ -74,7 +84,7 @@
           >Submit</SecondaryButton
         >
       </InputWrapper>
-    </form>
+    </StyledForm>
 
     <StyledNotification :message="message" :setMessage="setMessage" />
   </Wrapper>

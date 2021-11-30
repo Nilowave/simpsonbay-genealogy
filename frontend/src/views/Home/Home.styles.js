@@ -159,7 +159,7 @@ export const ControlSet = styled(Flex)`
   }
 
   @media ${respondTo(MediaQueryHeight.MAX_479, Orientation.landscape)} {
-    flex-direction: column !important;
+    flex-direction: column;
   }
 `;
 
@@ -206,7 +206,7 @@ export const ControlButton = styled.button`
 
   @media ${respondTo(MediaQueryHeight.MAX_767, Orientation.landscape)} {
     span {
-      display: none;
+      /* display: none; */
     }
   }
 

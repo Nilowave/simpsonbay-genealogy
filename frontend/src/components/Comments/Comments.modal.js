@@ -33,7 +33,16 @@ export default {
   data() {
     return {
       deleteConfirm: null,
+      viewAll: false,
     };
+  },
+
+  watch: {
+    viewAll(value) {
+      console.log("view all", value, this.page);
+
+      this.getPageComments(this.page, value);
+    },
   },
 
   methods: {
@@ -65,11 +74,18 @@ export default {
 
     const { message, setMessage } = useMessage();
 
-    const getPageComments = (page) => {
+    const getPageComments = (page, viewAll) => {
+      console.log(
+        `${process.env.VUE_APP_API_DOMAIN}/comments/e-book:1${
+          !viewAll && `?points=${page}`
+        }`
+      );
       isFetching.value = true;
       axios
         .get(
-          `${process.env.VUE_APP_API_DOMAIN}/comments/e-book:1?points=${page}`,
+          `${process.env.VUE_APP_API_DOMAIN}/comments/e-book:1${
+            viewAll ? "" : `?points=${page}`
+          }`,
           {
             withCredentials: true,
           }
