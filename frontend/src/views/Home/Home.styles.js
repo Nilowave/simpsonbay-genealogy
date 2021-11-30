@@ -126,6 +126,7 @@ export const ActionBar = styled.div`
   background: white;
   border-radius: 1rem 1rem 0 0;
   gap: 2rem;
+  margin-top: 1rem;
 
   @media ${respondTo(MediaQuery.MIN_768)} {
     justify-content: center;
@@ -170,9 +171,6 @@ export const ControlButton = styled.button`
   padding: 1.8rem 2.6rem;
   color: ${({ theme }) => theme.colors.green};
   font-weight: 600;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
   min-height: 5.6rem;
 
   transition: all 0.7s cubic-bezier(0.16, 1.52, 0.3, 1);
@@ -182,8 +180,7 @@ export const ControlButton = styled.button`
     color: ${({ theme }) => theme.colors.white};
   }
 
-  svg,
-  span {
+  > div {
     transition: all 0.7s cubic-bezier(0.16, 1.52, 0.3, 1);
   }
 
@@ -193,8 +190,7 @@ export const ControlButton = styled.button`
       color: ${({ theme }) => theme.colors.white};
       box-shadow: inset 3px 3px 3px rgba(0, 0, 0, 0.5);
 
-      svg,
-      span {
+      > div {
         transform: translate(3px, 3px);
       }
     }

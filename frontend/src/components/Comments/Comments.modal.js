@@ -49,7 +49,6 @@ export default {
           }
         )
         .then((res) => {
-          console.log("delete success");
           callback(this.page);
           this.deleteConfirm = null;
         })
@@ -67,7 +66,6 @@ export default {
     const { message, setMessage } = useMessage();
 
     const getPageComments = (page) => {
-      console.log("get comments ", page);
       isFetching.value = true;
       axios
         .get(
@@ -80,7 +78,6 @@ export default {
           const comments = res.data
             .filter((item) => !item.blocked && item.authorUser.id)
             .sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-          console.log(comments);
 
           items.value = comments;
           isFetching.value = false;
@@ -122,7 +119,6 @@ export default {
           { withCredentials: true }
         )
         .then((res) => {
-          console.log("comment posted success");
           // FETCH COMMENTS
           comment.value = "";
           getPageComments(props.page);

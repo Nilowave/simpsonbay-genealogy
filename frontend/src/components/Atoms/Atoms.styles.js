@@ -62,12 +62,14 @@ const TextProps = {
   color: String,
   margin: String,
   align: String,
+  size: String,
 };
 export const Text = styled("p", TextProps)`
   ${(props) => props.typeStyle && typestyles[props.typeStyle]};
   ${(props) => props.color && `color: ${props.theme.colors[props.color]};`};
   ${(props) => props.margin && `margin: ${props.margin};`};
   ${(props) => props.align && `text-align: ${props.align};`};
+  ${(props) => props.size && `font-size: ${props.size};`};
 `;
 
 const flexProps = {

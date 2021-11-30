@@ -73,8 +73,9 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   console.log("check if logged in", store.state.isLoggedIn);
 
-  if (store.state.isLoggedIn) next();
-  else
+  if (store.state.isLoggedIn) {
+    next();
+  } else {
     axios
       .get(`${process.env.VUE_APP_API_DOMAIN}/users/me`, {
         withCredentials: true,
@@ -104,6 +105,7 @@ router.beforeEach((to, from, next) => {
           next({ name: "Login" });
         }
       });
+  }
 });
 
 export default router;

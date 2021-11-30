@@ -42,16 +42,20 @@
             :class="{ disabled: !flipbook.canZoomOut }"
             @click="flipbook.zoomOut"
           >
-            <MinusIcon class="icon-16" />
-            <span>Zoom out</span>
+            <Flex align="center" justify="center" gap="1rem">
+              <MinusIcon class="icon-16" />
+              <span>Zoom out</span>
+            </Flex>
           </ControlButton>
 
           <ControlButton
             :class="{ disabled: !flipbook.canFlipLeft }"
             @click="flipbook.flipLeft"
           >
-            <NextIcon class="mirror icon-16" />
-            <span>Prev</span>
+            <Flex align="center" justify="center" gap="1rem">
+              <NextIcon class="mirror icon-16" />
+              <span>Prev</span>
+            </Flex>
           </ControlButton>
         </ControlSet>
 
@@ -64,16 +68,20 @@
             :class="{ disabled: !flipbook.canFlipRight }"
             @click="flipbook.flipRight"
           >
-            <span>Next</span>
-            <NextIcon class="icon-16" />
+            <Flex align="center" justify="center" gap="1rem">
+              <span>Next</span>
+              <NextIcon class="icon-16" />
+            </Flex>
           </ControlButton>
 
           <ControlButton
             :class="{ disabled: !flipbook.canZoomIn }"
             @click="flipbook.zoomIn"
           >
-            <span>Zoom in</span>
-            <PlusIcon class="icon-16" />
+            <Flex align="center" justify="center" gap="1rem">
+              <span>Zoom in</span>
+              <PlusIcon class="icon-16" />
+            </Flex>
           </ControlButton>
         </ControlSet>
 

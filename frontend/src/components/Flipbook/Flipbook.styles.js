@@ -7,7 +7,7 @@ export const Viewport = styled("div", { dragToScroll: Boolean, zoom: Boolean })`
   width: 100%;
   height: 100%;
   width: 90vw;
-  height: calc(100vh - 90px);
+  height: calc(100vh - 200px);
 
   @media ${respondTo(MediaQueryHeight.MAX_767, Orientation.landscape)} {
     width: auto;

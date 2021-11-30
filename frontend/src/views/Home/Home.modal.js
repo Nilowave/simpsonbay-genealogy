@@ -117,7 +117,8 @@ export default {
     setPageFromHash() {
       const n = parseInt(window.location.hash.slice(1), 10);
       if (isFinite(n)) {
-        this.pageNumber = n;
+        const toPage = n <= this.pages.length ? n : this.pages.length - 1;
+        this.pageNumber = toPage;
       }
     },
   },
@@ -142,16 +143,6 @@ export default {
     }
 
     // get book pdf
-    axios
-      .get(`${process.env.VUE_APP_API_DOMAIN}/e-book`, {
-        withCredentials: true,
-      })
-      .then((res) => {
-        this.bookLink = res.data.file.url;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
 
     // get book pages
     const pageResponse = await axios.get(
@@ -160,6 +151,8 @@ export default {
         withCredentials: true,
       }
     );
+
+    this.bookLink = pageResponse.data.book.file.url;
 
     this.pages = pageResponse.data.pages;
     this.pagesHiRes = pageResponse.data.pages;
