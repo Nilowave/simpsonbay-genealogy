@@ -9,12 +9,9 @@ export const Viewport = styled("div", { dragToScroll: Boolean, zoom: Boolean })`
   width: 90vw;
   height: calc(100vh - 200px);
 
-  @media ${respondTo(MediaQueryHeight.MAX_767, Orientation.landscape)} {
-    width: auto;
-    flex: 1;
-    height: 100%;
+  @media ${respondTo(MediaQueryHeight.MAX_479, Orientation.landscape)} {
+    height: calc(100vh - 2rem);
   }
-
   ${({ zoom }) =>
     zoom &&
     css`

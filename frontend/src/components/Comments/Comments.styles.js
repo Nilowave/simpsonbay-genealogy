@@ -55,6 +55,7 @@ export const HeaderTitle = styled(Flex)`
   flex: 1;
   align-self: center;
   margin-left: 2rem;
+  line-height: 1;
 `;
 
 export const CloseButton = styled.button`

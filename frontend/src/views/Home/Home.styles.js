@@ -159,7 +159,7 @@ export const ControlSet = styled(Flex)`
   }
 
   @media ${respondTo(MediaQueryHeight.MAX_479, Orientation.landscape)} {
-    flex-direction: column;
+    flex-direction: column !important;
   }
 `;
 
@@ -172,6 +172,8 @@ export const ControlButton = styled.button`
   color: ${({ theme }) => theme.colors.green};
   font-weight: 600;
   min-height: 5.6rem;
+  justify-content: center;
+  align-items: center;
 
   transition: all 0.7s cubic-bezier(0.16, 1.52, 0.3, 1);
 
@@ -206,7 +208,7 @@ export const ControlButton = styled.button`
 
   @media ${respondTo(MediaQueryHeight.MAX_767, Orientation.landscape)} {
     span {
-      /* display: none; */
+      display: none;
     }
   }
 
