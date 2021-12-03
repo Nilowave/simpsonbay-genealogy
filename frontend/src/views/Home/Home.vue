@@ -39,7 +39,7 @@
 
         <ControlSet align="center" justify="center" gap="2rem">
           <ControlButton
-            :class="{ disabled: !flipbook.canZoomOut }"
+            :class="{ disabled: !flipbook.canZoomOut, zoomButton: true }"
             @click="flipbook.zoomOut"
           >
             <Flex align="center" justify="center" gap="1rem">
@@ -75,7 +75,7 @@
           </ControlButton>
 
           <ControlButton
-            :class="{ disabled: !flipbook.canZoomIn }"
+            :class="{ disabled: !flipbook.canZoomIn, zoomButton: true }"
             @click="flipbook.zoomIn"
           >
             <Flex align="center" justify="center" gap="1rem">

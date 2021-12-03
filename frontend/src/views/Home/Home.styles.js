@@ -79,7 +79,7 @@ export const UsernameWrapper = styled.div`
   margin: 1.5rem ${({ theme }) => theme.sitePaddings.mobile};
   z-index: 10;
 
-  @media ${respondTo(MediaQueryHeight.MAX_767, Orientation.landscape)} {
+  @media ${respondTo(MediaQueryHeight.MAX_479, Orientation.landscape)} {
     display: none;
   }
 `;
@@ -206,8 +206,8 @@ export const ControlButton = styled.button`
     opacity: 0.5;
   }
 
-  @media ${respondTo(MediaQueryHeight.MAX_767, Orientation.landscape)} {
-    span {
+  @media ${respondTo(MediaQuery.MAX_767)} {
+    &.zoomButton {
       display: none;
     }
   }
@@ -224,17 +224,28 @@ export const DownloadButton = styled(PrimaryButton)`
   width: auto;
   position: absolute;
   right: ${({ theme }) => theme.sitePaddings.mobile};
-  bottom: 21.3rem;
+  bottom: 13rem;
+  z-index: 10;
+  padding: 12px 20px;
+
+  span {
+    display: none;
+  }
 
   @media ${respondTo(MediaQuery.MIN_768)} {
+    padding: 12px;
     bottom: 13.7rem;
+
+    span {
+      display: block;
+    }
   }
 
   @media only screen and (min-width: 1230px) {
     position: static;
   }
 
-  @media ${respondTo(MediaQueryHeight.MAX_767, Orientation.landscape)} {
+  @media ${respondTo(MediaQueryHeight.MAX_479, Orientation.landscape)} {
     display: none;
   }
 `;
@@ -243,14 +254,9 @@ export const CommentsButton = styled(PrimaryButton)`
   margin-right: auto;
   width: auto;
   position: absolute;
-  right: ${({ theme }) => theme.sitePaddings.mobile};
-  bottom: 27.3rem;
-
-  @media only screen and (min-width: 520px) {
-    bottom: 21.3rem;
-    left: ${({ theme }) => theme.sitePaddings.mobile};
-    right: auto;
-  }
+  left: ${({ theme }) => theme.sitePaddings.mobile};
+  bottom: 13rem;
+  z-index: 10;
 
   @media ${respondTo(MediaQuery.MIN_768)} {
     bottom: 13.7rem;
@@ -260,7 +266,7 @@ export const CommentsButton = styled(PrimaryButton)`
     position: static;
   }
 
-  @media ${respondTo(MediaQueryHeight.MAX_767, Orientation.landscape)} {
+  @media ${respondTo(MediaQueryHeight.MAX_479, Orientation.landscape)} {
     display: none;
   }
 `;
@@ -270,7 +276,7 @@ export const PolicyBarWrapper = styled.div`
   width: 100%;
   border-top: dashed 1px ${({ theme }) => theme.colors.lightgrey};
 
-  @media ${respondTo(MediaQueryHeight.MAX_767, Orientation.landscape)} {
+  @media ${respondTo(MediaQueryHeight.MAX_479, Orientation.landscape)} {
     display: none;
   }
 `;
