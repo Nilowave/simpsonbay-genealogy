@@ -13,8 +13,8 @@
           name="email"
           placeholder="Email"
           aria-disabled="true"
-          preset
-          disabled
+          :preset="!isGroup"
+          :disabled="!isGroup"
         />
         <Error v-if="email.error">{{ email.error.message }}</Error>
       </InputWrapper>
@@ -67,13 +67,26 @@ import router from "../../../router";
 import * as S from "../Login.styles";
 import * as Atoms from "../../../components/Atoms/Atoms.styles.js";
 
+const validateEmail = (value) => {
+  if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value)) {
+    return true;
+  }
+
+  return false;
+};
+
 export default {
   components: { ...S, ...Atoms },
 
-  setup() {
-    console.log("register");
+  props: {
+    setMessage: Function,
+    isGroup: Boolean,
+  },
+
+  setup(props) {
+    console.log("register : is group", props.isGroup);
     const invite = store.state.invite;
-    console.log(invite.email);
+    console.log(invite);
 
     const { useField, handleSubmit } = useForm({
       defaultValues: { email: invite.email },
@@ -84,7 +97,20 @@ export default {
     });
 
     const email = useField("email", {
-      rule: { required: true },
+      rule: {
+        required: true,
+        type: "email",
+        validator:
+          props.isGroup &&
+          ((rule, value) => {
+            const exists = invite.users.filter((user) => user.email === value);
+            const isValid = validateEmail(value);
+            if (!isValid) return new Error("Valid email is required");
+            if (exists.length)
+              return new Error("This email is already registered");
+            else return true;
+          }),
+      },
     });
 
     const password = useField("password", {
@@ -117,13 +143,25 @@ export default {
           password: data.password,
         })
         .then((response) => {
+          console.log(response.data);
+          const endpoint = props.isGroup ? "group-invites" : "invites";
+          const updateData = props.isGroup
+            ? {
+                users: [
+                  ...invite.users.map((user) => user.id),
+                  response.data.user.id,
+                ],
+              }
+            : {
+                confirmed: true,
+              };
+          console.log(updateData);
+
           const token = response.data.jwt;
           axios
             .put(
-              `${process.env.VUE_APP_API_DOMAIN}/invites/${invite.id}`,
-              {
-                confirmed: true,
-              },
+              `${process.env.VUE_APP_API_DOMAIN}/${endpoint}/${invite.id}`,
+              updateData,
               {
                 headers: {
                   authorization: `Bearer ${token}`,
@@ -142,7 +180,12 @@ export default {
         .catch((error) => {
           // Handle error.
           console.log("An error occurred:", error.response);
-          setMessage("There was an error. Please try again.");
+          if (error.response.status === 400) {
+            const message = error.response.data.message[0].messages[0].message;
+            props.setMessage(message);
+          } else {
+            props.setMessage("There was an error. Please try again.");
+          }
         });
     };
 

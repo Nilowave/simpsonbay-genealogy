@@ -42,24 +42,52 @@ const routes = [
     },
   },
   {
-    path: "/register/:id",
+    path: "/register",
     name: "Register",
     component: Login,
-    props: {
+    props: (route) => ({
       page: "Register",
-    },
+      isGroup: route.name === "Register Group",
+    }),
+    children: [
+      {
+        path: ":id",
+        name: "Register",
+        component: Login,
+      },
+      {
+        path: "group/:id",
+        name: "Register Group",
+        component: Login,
+      },
+    ],
     beforeEnter: (to, from, next) => {
-      if (store.state.isLoggedIn) next({ name: "Home" });
-      else
-        axios
-          .get(`${process.env.VUE_APP_API_DOMAIN}/getinvite/${to.params.id}`)
-          .then((res) => {
-            store.commit("setInvite", res.data);
-            next();
-          })
-          .catch((err) => {
-            next({ name: "Login" });
-          });
+      if (store.state.isLoggedIn) {
+        next({ name: "Home" });
+      } else {
+        if (to.name === "Register Group")
+          axios
+            .get(
+              `${process.env.VUE_APP_API_DOMAIN}/get-group-invites/${to.params.id}`
+            )
+            .then((res) => {
+              store.commit("setInvite", res.data);
+              next();
+            })
+            .catch((err) => {
+              next({ name: "Login" });
+            });
+        else
+          axios
+            .get(`${process.env.VUE_APP_API_DOMAIN}/getinvite/${to.params.id}`)
+            .then((res) => {
+              store.commit("setInvite", res.data);
+              next();
+            })
+            .catch((err) => {
+              next({ name: "Login" });
+            });
+      }
     },
   },
   { path: "/:pathMatch(.*)*", component: PathNotFound },
@@ -98,6 +126,7 @@ router.beforeEach((to, from, next) => {
         if (
           to.name === "Login" ||
           to.name === "Register" ||
+          to.name === "Register Group" ||
           to.name === "ResetPassword"
         ) {
           next();

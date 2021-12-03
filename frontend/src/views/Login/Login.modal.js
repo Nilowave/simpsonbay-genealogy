@@ -34,6 +34,10 @@ export default {
       default: "Login",
     },
     showModal: Function,
+    isGroup: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   methods: {
@@ -88,6 +92,7 @@ export default {
         case "RegisterForm":
           return {
             setMessage: this.setMessage,
+            isGroup: this.isGroup,
           };
       }
     },
