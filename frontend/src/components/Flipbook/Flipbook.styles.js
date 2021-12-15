@@ -1,13 +1,21 @@
 import styled, { css } from "vue3-styled-components";
 import { respondTo } from "../../styles/helpers/respondTo";
-import { MediaQueryHeight, Orientation } from "../../styles/mediaQuery";
+import {
+  MediaQueryHeight,
+  MediaQuery,
+  Orientation,
+} from "../../styles/mediaQuery";
 
 export const Viewport = styled("div", { dragToScroll: Boolean, zoom: Boolean })`
   -webkit-overflow-scrolling: touch;
   width: 100%;
   height: 100%;
-  width: 90vw;
+  width: 100vw;
   height: calc(100vh - 200px);
+
+  @media ${respondTo(MediaQuery.MIN_480)} {
+    width: 90vw;
+  }
 
   @media ${respondTo(MediaQueryHeight.MAX_479, Orientation.landscape)} {
     height: calc(100vh - 2rem);
