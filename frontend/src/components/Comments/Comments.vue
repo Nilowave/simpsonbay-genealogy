@@ -35,6 +35,9 @@
               <Text typeStyle="bodyBold">{{ item.authorUser.fullname }}</Text>
 
               <!-- <Text typeStyle="note">{{ item.created_at }}</Text> -->
+              <Text v-if="viewAll" typeStyle="note"
+                >Page {{ item.points }}</Text
+              >
               <DeleteButton
                 @click="deleteConfirm = item.id"
                 v-if="user.id === item.authorUser.id"
@@ -66,10 +69,15 @@
       </CommentsList>
       <EmptyList v-else>
         <Loader v-if="isFetching" />
-        <Text v-else typeStyle="bodyBold"
-          >No comments for Page {{ page }}.<br />Be there first to leave a
-          comment!</Text
-        >
+        <Text v-else typeStyle="bodyBold">
+          <span v-if="viewAll"
+            >No comments yet.<br />Be there first to leave a comment!</span
+          >
+          <span v-else
+            >No comments for Page {{ page }}.<br />Be there first to leave a
+            comment!</span
+          >
+        </Text>
       </EmptyList>
     </CommentsWrapper>
     <StyledForm @submit="onSubmit">

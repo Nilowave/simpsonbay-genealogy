@@ -96,6 +96,7 @@ export default {
             .sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
           items.value = comments;
+          console.log(comments);
           isFetching.value = false;
         })
         .catch((err) => {
