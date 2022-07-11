@@ -23,6 +23,7 @@ const routes = [
         next({ name: "Home" });
       } else {
         next();
+        console.log("go login");
       }
     },
   },
@@ -76,6 +77,7 @@ const routes = [
             })
             .catch((err) => {
               next({ name: "Login" });
+              console.log("go login");
             });
         else
           axios
@@ -86,6 +88,7 @@ const routes = [
             })
             .catch((err) => {
               next({ name: "Login" });
+              console.log("go login");
             });
       }
     },
@@ -99,8 +102,6 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  console.log("check if logged in", store.state.isLoggedIn);
-
   if (store.state.isLoggedIn) {
     next();
   } else {
@@ -109,7 +110,6 @@ router.beforeEach((to, from, next) => {
         withCredentials: true,
       })
       .then((res) => {
-        console.log("user logged in as", res.data);
         if (res.data.id) {
           store.commit("setIsLoggedIn", res.data);
           store.commit("setReadPages", res.data.readPages);
@@ -119,6 +119,7 @@ router.beforeEach((to, from, next) => {
             next();
           } else {
             next({ name: "Login" });
+            console.log("no user data, go login", res);
           }
         }
       })

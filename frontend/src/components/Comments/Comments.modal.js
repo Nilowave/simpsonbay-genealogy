@@ -39,8 +39,6 @@ export default {
 
   watch: {
     viewAll(value) {
-      console.log("view all", value, this.page);
-
       this.getPageComments(this.page, value);
     },
   },
@@ -48,7 +46,6 @@ export default {
   methods: {
     stringToColour,
     deleteComment(id, callback) {
-      console.log("delete comment", id);
       // this.deleteConfirm = id;
       axios
         .delete(
@@ -62,7 +59,6 @@ export default {
           this.deleteConfirm = null;
         })
         .catch((err) => {
-          console.log(err);
           this.deleteConfirm = null;
         });
     },
@@ -75,11 +71,6 @@ export default {
     const { message, setMessage } = useMessage();
 
     const getPageComments = (page, viewAll) => {
-      console.log(
-        `${process.env.VUE_APP_API_DOMAIN}/comments/e-book:1${
-          !viewAll && `?points=${page}`
-        }`
-      );
       isFetching.value = true;
       axios
         .get(
@@ -96,12 +87,10 @@ export default {
             .sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
           items.value = comments;
-          console.log(comments);
           isFetching.value = false;
         })
         .catch((err) => {
           isFetching.value = false;
-          console.log(err);
           return [];
         });
     };
@@ -141,7 +130,6 @@ export default {
           getPageComments(props.page);
         })
         .catch((err) => {
-          console.log(err.response.data.message);
           if (err.response.status === 400) {
             const errorMessage = JSON.parse(err.response.data.message);
             setMessage(errorMessage.message);
@@ -149,8 +137,6 @@ export default {
             setMessage(
               "Something went wrong. Please try again or contact info@simpsonbay-heritage.com"
             );
-            console.log(err.response.data.message);
-            console.log(err.response.headers);
           }
         });
     };

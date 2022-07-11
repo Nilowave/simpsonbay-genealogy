@@ -8,7 +8,6 @@ export const useModal = () => {
 
   const modal = ref(defaultValue);
   const showModal = (component) => {
-    console.log(component);
     modal.value = {
       component,
       isVisible: true,

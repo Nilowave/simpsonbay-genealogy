@@ -33,7 +33,6 @@ export default {
   },
   data() {
     if (window.innerHeight < 480 && window.innerHeight < window.innerWidth) {
-      console.log("single pager");
     }
     return {
       pages: [],
@@ -70,12 +69,10 @@ export default {
           { withCredentials: true }
         )
         .then((res) => {
-          console.log("logout success", res.data);
           store.commit("setIsLoggedIn", false);
           router.push("/login");
         })
         .catch((err) => {
-          console.log(err);
           router.push("/login");
         });
     },
@@ -93,12 +90,8 @@ export default {
               },
               { withCredentials: true }
             )
-            .then((res) => {
-              console.log("user updated");
-            })
-            .catch((err) => {
-              console.log("user update error", err.response);
-            });
+            .then((res) => {})
+            .catch((err) => {});
         }
       }
     },
@@ -134,12 +127,8 @@ export default {
           },
           { withCredentials: true }
         )
-        .then((res) => {
-          console.log("user updated");
-        })
-        .catch((err) => {
-          console.log("user update error", err.response);
-        });
+        .then((res) => {})
+        .catch((err) => {});
     }
 
     // get book pdf

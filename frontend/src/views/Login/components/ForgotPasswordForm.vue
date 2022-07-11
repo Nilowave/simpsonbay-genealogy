@@ -54,7 +54,6 @@ export default {
           email: data.email, // user's email
         })
         .then((response) => {
-          console.log("Your user received an email");
           props.setMessage(`Password recovery email sent to ${data.email}`);
           props.backToLogin();
         })
@@ -62,7 +61,6 @@ export default {
           props.setMessage(
             "There was an error sending the email. Please try again or contact info@simpsonbay-heritage.com"
           );
-          console.log("An error occurred:", error.response);
         });
     };
 

@@ -61,7 +61,6 @@ export default {
   },
   mounted() {
     const code = this.$route.query.code;
-    console.log(code);
     if (!code) {
       router.push("/login");
     }
@@ -101,7 +100,6 @@ export default {
           passwordConfirmation: data.confirmpassword,
         })
         .then((response) => {
-          // console.log("Your user's password has been reset.");
           store.commit("setResetPasswordCode", null);
           props.setMessage("Your user's password has been reset.");
           props.backToLogin();
@@ -110,7 +108,6 @@ export default {
           props.setMessage(
             "There was an error. Please try again or contact info@simpsonbay-heritage.com"
           );
-          console.log("An error occurred:", error.response);
         });
     };
 

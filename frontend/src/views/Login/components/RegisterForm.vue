@@ -84,9 +84,7 @@ export default {
   },
 
   setup(props) {
-    console.log("register : is group", props.isGroup);
     const invite = store.state.invite;
-    console.log(invite);
 
     const { useField, handleSubmit } = useForm({
       defaultValues: { email: invite.email },
@@ -134,7 +132,6 @@ export default {
     });
 
     const onSubmit = (data) => {
-      console.log(data);
       axios
         .post(`${process.env.VUE_APP_API_DOMAIN}/auth/local/register`, {
           fullname: data.name,
@@ -143,7 +140,6 @@ export default {
           password: data.password,
         })
         .then((response) => {
-          console.log(response.data);
           const endpoint = props.isGroup ? "group-invites" : "invites";
           const updateData = props.isGroup
             ? {
@@ -155,7 +151,6 @@ export default {
             : {
                 confirmed: true,
               };
-          console.log(updateData);
 
           const token = response.data.jwt;
           axios
@@ -169,17 +164,14 @@ export default {
               }
             )
             .then((res) => {
-              console.log("updated invtie", res.data);
               router.push("/");
             })
             .catch((err) => {
-              console.log("failed updating invite", err.response);
               router.push("/");
             });
         })
         .catch((error) => {
           // Handle error.
-          console.log("An error occurred:", error.response);
           if (error.response.status === 400) {
             const message = error.response.data.message[0].messages[0].message;
             props.setMessage(message);

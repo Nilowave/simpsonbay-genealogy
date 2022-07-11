@@ -81,7 +81,6 @@ export default {
           }
         )
         .then((res) => {
-          console.log("login success, push /", res.data);
           if (props.onSubmitRedirect) {
             props.onSubmitRedirect();
           } else {
@@ -89,7 +88,6 @@ export default {
           }
         })
         .catch((err) => {
-          console.log(err.response);
           if (err.response.status === 400) {
             props.setMessage("Incorrect email or password. Please try again.");
           } else if (err.response.data.message) {

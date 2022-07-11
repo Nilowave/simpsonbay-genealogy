@@ -26,8 +26,6 @@ export default {
       terms: "terms",
     };
   },
-  setup(props) {
-    console.log(props);
-  },
+  setup(props) {},
 };
 </script>
