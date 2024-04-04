@@ -1,8 +1,8 @@
 <template>
   <Wrapper direction="column" justify="center">
-    <Heading>Welcome to the family!</Heading>
+    <Heading>Create an account</Heading>
     <Paragraph>
-      Please register your infromation below to gain exclusive access.
+      Please register your information below to gain exclusive access.
     </Paragraph>
     <StyledForm @submit="onSubmit">
       <InputWrapper>
